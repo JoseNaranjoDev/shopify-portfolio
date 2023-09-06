@@ -1,16 +1,20 @@
 {
-    "name": "portfolioapp",
-    "version": "1.0.0",
-    "description": "Jose Naranjo's Portfolio",
-    "main": "shopifyDev.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "Jose Naranjo",
-    "license": "ISC",
-    "dependencies": {
-        "express": "^4.17.3",
-        "nodemailer": "^6.7.2",
-        "pug": "^3.0.2"
-    }
+  "name": "portfolioapp",
+  "version": "1.0.0",
+  "description": "Jose Naranjo's Portfolio",
+  "main": "shopifyDev.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon shopifyDev.mjs"
+  },
+  "author": "Jose Naranjo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "node-cron": "^3.0.2",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.7.2",
+    "nodemon": "^3.0.1",
+    "pug": "^3.0.2"
+  }
 }
