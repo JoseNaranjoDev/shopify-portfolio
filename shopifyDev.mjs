@@ -36,6 +36,15 @@ app.get("/starlinker", (req, res) => {
 app.get("/coffeepots", (req, res) => {
   res.sendFile(path.join(__dirname, "public/html/coffeepots.html"));
 });
+app.get("/instagram_token", (req, res) => {
+  try {
+    const data = fs.readFileSync(tokenFilePath, "utf8");
+    const json = JSON.parse(data);
+    res.send(json.long_lived_access_token);
+  } catch (error) {
+    res.json(error);
+  }
+});
 
 // POST request
 
