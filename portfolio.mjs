@@ -6,6 +6,7 @@ import nodemailer from "nodemailer";
 import fetch from "node-fetch";
 import cron from "node-cron";
 import fs from "fs";
+import cors from "cors";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.set("view engine", "pug");
 //BODY PARSER MIDDLEWARE
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 // GET REQUEST
 app.get("/", (req, res) => {
@@ -40,7 +42,7 @@ app.get("/instagram_token", (req, res) => {
   try {
     const data = fs.readFileSync(tokenFilePath, "utf8");
     const json = JSON.parse(data);
-    res.send(json.long_lived_access_token);
+    res.json({ current_token: json.long_lived_access_token });
   } catch (error) {
     res.json(error);
   }
