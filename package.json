@@ -2,10 +2,10 @@
   "name": "portfolioapp",
   "version": "1.0.0",
   "description": "Jose Naranjo's Portfolio",
-  "main": "shopifyDev.js",
+  "main": "portfolio.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon shopifyDev.mjs"
+    "start": "nodemon portfolio.mjs"
   },
   "author": "Jose Naranjo",
   "license": "ISC",
