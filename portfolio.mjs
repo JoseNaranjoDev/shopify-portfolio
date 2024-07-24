@@ -2,10 +2,8 @@ import express, { json } from "express";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import nodemailer from "nodemailer";
-
-import fetch from "node-fetch";
-import cron from "node-cron";
 import fs from "fs";
+import cors from "cors";
 
 const app = express();
 
@@ -19,6 +17,7 @@ app.set("view engine", "pug");
 //BODY PARSER MIDDLEWARE
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 // GET REQUEST
 app.get("/", (req, res) => {
@@ -40,7 +39,7 @@ app.get("/instagram_token", (req, res) => {
   try {
     const data = fs.readFileSync(tokenFilePath, "utf8");
     const json = JSON.parse(data);
-    res.send(json.long_lived_access_token);
+    res.json({ current_token: json.long_lived_access_token });
   } catch (error) {
     res.json(error);
   }
@@ -92,42 +91,6 @@ app.post("/send", (req, res) => {
   }
 
   main().catch(console.error);
-});
-
-// Instagram Access Token
-const tokenFilePath = "./token.json";
-
-const refreshAccessToken = async (longLivedAccessToken) => {
-  const url = `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${longLivedAccessToken}`;
-
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if (data.access_token) {
-      const jsonData = JSON.stringify(
-        { long_lived_access_token: data.access_token },
-        null,
-        4
-      );
-      fs.writeFileSync(tokenFilePath, jsonData);
-      console.log("New Access Token: ", data.access_token);
-    } else {
-      console.error("Could not refresh access token", data);
-    }
-  } catch (error) {
-    console.error("An error occurred while refreshing the access token", error);
-  }
-};
-
-cron.schedule("0 0 1 * *", () => {
-  try {
-    const data = fs.readFileSync(tokenFilePath, "utf8");
-    const json = JSON.parse(data);
-    refreshAccessToken(json.long_lived_access_token);
-  } catch {
-    console.error("An error occurred:", error.message);
-  }
 });
 
 // SERVER

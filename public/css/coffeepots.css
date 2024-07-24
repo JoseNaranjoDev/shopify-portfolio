@@ -1,7 +1,7 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 body {
   position: relative;
@@ -13,33 +13,33 @@ body {
   right: 0;
   width: 100%;
   padding: 10px;
-  display: flex;  
+  display: flex;
   justify-content: space-between;
   height: 60px;
   background-color: rgba(0, 0, 0, 0.829);
   z-index: 10;
 }
-.title>a {
-    text-decoration: none;
-    color: white;
-    padding: 5px 20px 5px 20px;
-    display: flex;
-    align-items: center;
-    font-family: 'Gemunu Libre', sans-serif;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 200ms linear;
+.title > a {
+  text-decoration: none;
+  color: white;
+  padding: 5px 20px 5px 20px;
+  display: flex;
+  align-items: center;
+  font-family: "Gemunu Libre", sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 200ms linear;
 }
-.title>a:hover {
-    color: rgb(7,177,16);
-    background-color: black;
-    border-radius: 15px;
-    transition: all 100ms linear;
+.title > a:hover {
+  color: rgb(7, 177, 16);
+  background-color: black;
+  border-radius: 15px;
+  transition: all 100ms linear;
 }
 .nav-links {
   width: 50%;
 }
-.nav-links>ul {
+.nav-links > ul {
   position: relative;
   right: 50px;
 }
@@ -47,190 +47,200 @@ body {
   padding: 5px;
   list-style: none;
 }
-.nav-links>.services {
+.nav-links > .services {
   position: absolute;
   right: 260px;
   top: 15px;
 }
-.nav-links>.projects {
+.nav-links > .projects {
   position: absolute;
   right: 160px;
   top: 15px;
 }
-.nav-links>.contact {
+.nav-links > .contact {
   position: absolute;
   right: 70px;
   top: 15px;
 }
-.nav-links>li>a {
+.nav-links > li > a {
   text-decoration: none;
   color: rgb(238, 238, 238);
   cursor: pointer;
   font-size: 25px;
-  font-family: 'Gemunu Libre', sans-serif;
+  font-family: "Gemunu Libre", sans-serif;
   transition: all 200ms ease;
 }
-.nav-links>li>a:hover {
-    box-sizing: content-box;
-    color:  white;
-    padding: 5px;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
-    border-radius: 10px;
-    background: rgb(7,177,16);
-    background: -moz-radial-gradient(circle, rgba(7,177,16,0.7570378493194152) 39%, rgba(0,255,12,0.7066176812521884) 88%);
-    background: -webkit-radial-gradient(circle, rgba(7,177,16,0.7570378493194152) 39%, rgba(0,255,12,0.7066176812521884) 88%);
-    background: radial-gradient(circle, rgba(7,177,16,0.7570378493194152) 39%, rgba(0,255,12,0.7066176812521884) 88%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#07b110",endColorstr="#00ff0c",GradientType=1);
-    transition: all 200ms ease;
+.nav-links > li > a:hover {
+  box-sizing: content-box;
+  color: white;
+  padding: 5px;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 10px;
+  background: rgb(7, 177, 16);
+  background: -moz-radial-gradient(
+    circle,
+    rgba(7, 177, 16, 0.7570378493194152) 39%,
+    rgba(0, 255, 12, 0.7066176812521884) 88%
+  );
+  background: -webkit-radial-gradient(
+    circle,
+    rgba(7, 177, 16, 0.7570378493194152) 39%,
+    rgba(0, 255, 12, 0.7066176812521884) 88%
+  );
+  background: radial-gradient(
+    circle,
+    rgba(7, 177, 16, 0.7570378493194152) 39%,
+    rgba(0, 255, 12, 0.7066176812521884) 88%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#07b110",endColorstr="#00ff0c",GradientType=1);
+  transition: all 200ms ease;
 }
 
 .header {
-    text-align: center;
-    height: 100vh;
+  text-align: center;
+  height: 100vh;
 }
-.video-container>p {
-    padding: 20px 10px;
-    color: goldenrod;
-    font-size: 25px;
-    font-family: 'Gemunu Libre', sans-serif;
+.video-container > p {
+  padding: 20px 10px;
+  color: goldenrod;
+  font-size: 25px;
+  font-family: "Gemunu Libre", sans-serif;
 }
 
-    /* LOOM VIDEO // COPY FOR EVERY PROJECT DEMO  */
+/* LOOM VIDEO // COPY FOR EVERY PROJECT DEMO  */
 .video-container {
-    margin-top: 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .video {
-    height: 70%;
-    width: 70%;
+  height: 70%;
+  width: 70%;
 }
 .container {
-    width: 100%;
+  width: 100%;
 }
 .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 }
-.video-container>h1 {
-    font-family: 'Gemunu Libre', sans-serif;
-    text-align: center;
+.video-container > h1 {
+  font-family: "Gemunu Libre", sans-serif;
+  text-align: center;
 }
 .main {
-    padding: 100px 0;
-    text-align: center;
-    font-family: 'Gemunu Libre', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  padding: 100px 0;
+  text-align: center;
+  font-family: "Gemunu Libre", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.main>h2 {
-    font-size: 40px;
-    margin: 20px 0;
-    font-family: 'Gemunu Libre', sans-serif;
+.main > h2 {
+  font-size: 40px;
+  margin: 20px 0;
+  font-family: "Gemunu Libre", sans-serif;
 }
-.main>p {
-    color: goldenrod;
-    margin-bottom: 20px;
-    font-size: 25px;
+.main > p {
+  color: goldenrod;
+  margin-bottom: 20px;
+  font-size: 25px;
 }
 .main-img {
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 80px;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 80px;
 }
 .phone-mockup {
-    width: 300px;
-    margin-bottom: 80px;
+  width: 300px;
+  margin-bottom: 80px;
 }
 footer {
-    padding: 25px;
-    color: rgb(168, 160, 160);
-    background-color: rgb(51, 51, 51);
+  padding: 25px;
+  color: rgb(168, 160, 160);
+  background-color: rgb(51, 51, 51);
 }
 .footer-links {
-    display: flex;
-    justify-content: space-around;
-    font-size: 20px;
-    font-family: 'Gemunu Libre', sans-serif;
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px;
+  font-family: "Gemunu Libre", sans-serif;
 }
-.footer-links>ul {
-    display: flex;
-    flex-wrap: wrap;
+.footer-links > ul {
+  display: flex;
+  flex-wrap: wrap;
 }
-.footer-links>ul>li {
-    list-style: none;
-    margin: 20px 10px;
+.footer-links > ul > li {
+  list-style: none;
+  margin: 20px 10px;
 }
-.footer-links>ul>li>a {
-    text-decoration: none;
-    color: white;
+.footer-links > ul > li > a {
+  text-decoration: none;
+  color: white;
 }
-.footer-links>ul>li>a:hover {
-    color: greenyellow;
+.footer-links > ul > li > a:hover {
+  color: greenyellow;
 }
 cite {
-    margin: 20px;
+  margin: 20px;
 }
 
 @media only screen and (max-width: 780px) {
-
-    .nav {
-        flex-direction: column;
-        height: 80px;
-    }
-    .title {
-        width: 100%;
-        
-    }
-    .title>a {
-        justify-content: center;
-        padding: 0;
-        width: 100%;
-        margin: 0 auto;
-    }
-    .video {
-        height: 100%;
-        width: 80%;
-    }
-    .nav-links {
-        width: 100%;
-        height: 60px;
-        display: flex;
-        justify-content: space-evenly;
-    }
-    .nav-links>.services {
-        position: relative;
-        right: 0;
-        left: 0;
-        top: 0;
-    }
-    .nav-links>.projects {
-        position: relative;
-        right: 0;
-        left: 0;
-        top: 0;
-    }
-    .nav-links>.features {
-        position: relative;
-        right: 0;
-        left: 0;
-        top: 0;
-    }
-    .nav-links>.contact {
-        position: relative;
-        right: 0;
-        left: 0;
-        top: 0;
-    }
+  .nav {
+    flex-direction: column;
+    height: 80px;
+  }
+  .title {
+    width: 100%;
+  }
+  .title > a {
+    justify-content: center;
+    padding: 0;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .video {
+    height: 100%;
+    width: 80%;
+  }
+  .nav-links {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .nav-links > .services {
+    position: relative;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+  .nav-links > .projects {
+    position: relative;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+  .nav-links > .features {
+    position: relative;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+  .nav-links > .contact {
+    position: relative;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
 }
-@media only screen and (max-width: 500px)  {
-    .video {
-        height: 100%;
-        width: 90%;
-    }
+@media only screen and (max-width: 500px) {
+  .video {
+    height: 100%;
+    width: 90%;
+  }
 }
