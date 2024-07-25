@@ -410,7 +410,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(32, 35, 46);
+  background-color: rgb(33 35 43);
+  border-top: 30px solid #000;
   clip-path: polygon(0 0, 100% 0%, 100% 95%, 50% 100%, 0 95%);
 }
 .portfolio-cta-section > h2 {
@@ -562,8 +563,8 @@ body {
   transform: translate(0, 10px);
 }
 .customizations-cont {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   width: 100%;
   max-width: 1200px;
@@ -574,18 +575,13 @@ body {
   padding: 10px;
   width: 100%;
   display: flex;
+  flex-direction: column;
   border: 2px solid #000;
   border-radius: 10px;
   overflow: hidden;
 }
-.cust-box.img-right {
-  flex-direction: row-reverse;
-}
-.cust-box.img-left {
-  flex-direction: row;
-}
 .cust-left {
-  width: 50%;
+  width: 100%;
 }
 .cust-left img {
   max-width: 100%;
@@ -593,28 +589,35 @@ body {
 }
 .cust-right {
   padding: 20px;
-  width: 50%;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 .cust-right h2 {
-  font-size: 38px;
-  margin-bottom: 10px;
+  font-size: 30px;
+  margin-bottom: 5px;
 }
 .cust-right h3 {
+  font-size: 22px;
   margin-bottom: 20px;
+  text-transform: uppercase;
 }
 .cust-right p {
   margin-bottom: 20px;
 }
-.cust-right a {
+.cust-links-box a {
+  display: block;
   text-decoration: none;
   color: green;
   margin: 5px;
   text-transform: uppercase;
 }
-.cust-right a:hover {
+.cust-links-box a:hover {
   color: rgb(149, 191, 71);
+}
+.cust-links-box {
+  margin-top: auto;
 }
 .projects-cont {
   width: 100%;
@@ -983,7 +986,12 @@ cite {
     padding-left: 0;
     padding-right: 0;
   }
-  .cust-box {
+  .cust-box.img-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .cust-box.img-right {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -992,7 +1000,11 @@ cite {
     width: 100%;
   }
   .cust-right {
+    padding: 5px;
     width: 100%;
+  }
+  .cust-right p {
+    font-size: 18px;
   }
   .projects-cont {
     grid-template-columns: repeat(2, minmax(160px, 1fr));
