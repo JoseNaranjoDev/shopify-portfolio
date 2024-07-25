@@ -53,3 +53,10 @@ if (window.innerWidth < 780) {
 if (window.innerWidth >= 780) {
   videoSource.setAttribute("src", "../video/portfolio-cta.mp4");
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const profileBox = document.getElementById("profile-box");
+  const profileImg = profileBox.querySelector("img");
+  profileImg.style.display = "block";
+  console.log("loaded");
+});
