@@ -13,6 +13,18 @@
       content="Shopify Expert offering Shopify E-Commerce platform solutions. Shopify development including theme customizations, store setup, migration to Shopify and store management. 100% client satisfaction goal and 100% money back gaurantee!."
     />
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="../css/slick-theme.css" />
+    <script
+      type="text/javascript"
+      src="//code.jquery.com/jquery-1.11.0.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//code.jquery.com/jquery-migrate-1.2.1.min.js"
+    ></script>
+    <script type="text/javascript" src="../js/slick.min.js"></script>
+
     <title>Shopify | JoseNaranjo.DEV</title>
 
     <script
@@ -191,7 +203,7 @@
         poster="../img/portfolio-cta-thumbnail.webp"
         controls
       >
-        <source src="/public/video/portfolio-cta.mp4" type="video/mp4" />
+        <source src="../video/portfolio-cta.mp4" type="video/mp4" />
       </video>
     </section>
 
@@ -268,7 +280,7 @@
                 <li>Any-Commerce</li>
               </ul>
               <br />
-              <h4>➡ To Shopify</h4>
+              <p>➡ To Shopify</p>
             </div>
           </div>
 
@@ -633,29 +645,10 @@
 
       <h2 class="reviews-h2">Reviews</h2>
 
-      <div class="reviews">
-        <div class="review-box">
-          <img
-            src="../img/Upwork-Review-1.png"
-            alt="Jose Naranjo Shopify review"
-          />
-          <cite>-Paulino V.</cite>
-        </div>
-
-        <div class="review-box">
-          <img
-            src="../img/Upwork-Review-2.png"
-            alt="Jose Naranjo Shopify review"
-          />
-          <cite>-Trevor N.</cite>
-        </div>
-
-        <div class="review-box">
-          <img
-            src="../img/client-testimonials.png"
-            alt="Jose Naranjo Shopify review"
-          />
-        </div>
+      <div class="reviews-slick">
+        <div>your content</div>
+        <div>your content</div>
+        <div>your content</div>
       </div>
     </section>
     <!-- CLOSE PROJECTS SECTION -->
@@ -745,19 +738,19 @@
       <!-- Form spark action="https://submit-form.com/RjCqfG6o" -->
 
       <form id="form_box" class="form" action="/send" method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" required />
+        <label for="contact-name">Name:</label>
+        <input id="contact-name" type="text" name="name" required />
 
         <!--  *********   -->
-        <label style="display: none">Email:</label>
+        <label for="contact_email" style="display: none">Email:</label>
         <input id="contact_email" style="display: none" name="email" />
         <!--  *********   -->
 
-        <label>Email:</label>
-        <input type="email" name="emailee" required />
+        <label for="contact_email_2">Email:</label>
+        <input id="contact_email_2" type="email" name="emailee" required />
 
-        <label>Message:</label>
-        <textarea name="message" rows="8"></textarea>
+        <label for="contact_message">Message:</label>
+        <textarea id="contact_message" name="message" rows="8"></textarea>
         <br />
         <div id="secure_box" class="secure-box">
           <div style="display: inline">
@@ -800,5 +793,36 @@
     </footer>
 
     <script src="../js/index.js" defer></script>
+    <script type="text/javascript" src="../js/slick.min.js" defer></script>
+    <script type="text/javascript">
+      $.fn.initializeSlickCarousel = function () {
+        $(".reviews-slick ").slick({
+          infinite: true,
+          centerMode: true,
+          centerPadding: "30px",
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          adaptiveHeight: true,
+          responsive: [
+            {
+              breakpoint: 769,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                dots: true,
+              },
+            },
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+          ],
+        });
+      };
+      $(document).ready(function () {
+        $.fn.initializeSlickCarousel();
+      });
+    </script>
   </body>
 </html>

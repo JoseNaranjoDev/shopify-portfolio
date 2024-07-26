@@ -480,7 +480,7 @@ body {
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  background-color: rgb(247, 247, 247);
+  background-color: rgb(34 34 54);
   transition: all 200ms linear;
 }
 .imghead {
@@ -521,7 +521,7 @@ body {
   font-size: 18px;
   line-height: 1.4;
   font-family: "lato", sans-serif;
-  color: rgb(83, 83, 83);
+  color: #fff;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -613,7 +613,7 @@ body {
   flex-direction: column;
 }
 .cust-text-box h2 {
-  font-size: 30px;
+  font-size: 26px;
   margin-bottom: 5px;
 }
 .cust-text-box h3 {
@@ -622,6 +622,7 @@ body {
   text-transform: uppercase;
 }
 .cust-text-box p {
+  margin-top: auto;
   margin-bottom: 20px;
 }
 .cust-links-box a {
@@ -670,6 +671,12 @@ body {
 .project-div h3 {
   font-size: 20px;
   color: goldenrod;
+  background-color: rgb(34 34 54);
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 3px;
+  width: max-content;
+  margin: 5px auto;
 }
 .project-div:hover {
   box-shadow: 0 0 15px 3px rgb(47, 65, 43);
