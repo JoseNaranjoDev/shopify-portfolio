@@ -68,8 +68,9 @@
 .slick-slide {
   display: none;
   float: left;
-
+  margin: 0 10px;
   height: 100%;
+  border-radius: 10px;
   min-height: 1px;
 }
 [dir="rtl"] .slick-slide {

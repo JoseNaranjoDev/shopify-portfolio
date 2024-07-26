@@ -701,6 +701,7 @@ body {
   width: 100%;
   text-align: center;
   margin-top: 100px;
+  margin-bottom: 20px;
   font-size: 2rem;
   font-family: "Gemunu Libre", sans-serif;
 }
@@ -1159,6 +1160,7 @@ cite {
   }
   .projects-section {
     padding-top: 1px;
+    padding-bottom: 250px;
   }
   .project-heading {
     padding: 20px 0;

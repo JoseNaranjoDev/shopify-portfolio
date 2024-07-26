@@ -646,9 +646,66 @@
       <h2 class="reviews-h2">Reviews</h2>
 
       <div class="reviews-slick">
-        <div>your content</div>
-        <div>your content</div>
-        <div>your content</div>
+        <img
+          src="../img/review-3.webp"
+          alt="Client review"
+          width="300"
+          height="300"
+        />
+        <img
+          src="../img/review-7.webp"
+          alt="Client review"
+          width="300"
+          height="300"
+        />
+        <img
+          src="../img/review-4.webp"
+          alt="Client review"
+          width="300"
+          height="300"
+        />
+        <img
+          src="../img/review-5.webp"
+          alt="Client review"
+          width="300"
+          height="300"
+        />
+        <img
+          src="../img/review-6.webp"
+          alt="Client review"
+          width="300"
+          height="300"
+        />
+        <img
+          src="../img/review-8.webp"
+          alt="Client review"
+          width="300"
+          height="300"
+        />
+        <img
+          src="../img/review-9.webp"
+          alt="Client review"
+          width="300"
+          height="300"
+        />
+        <img
+          src="../img/review-10.webp"
+          alt="Client review"
+          width="300"
+          height="300"
+        />
+        <img
+          src="../img/review-1.webp"
+          alt="Client review"
+          width="300"
+          height="300"
+        />
+        <img
+          src="../img/review-2.webp"
+          alt="Client review"
+          width="300"
+          height="300"
+        />
       </div>
     </section>
     <!-- CLOSE PROJECTS SECTION -->
@@ -798,20 +855,15 @@
       $.fn.initializeSlickCarousel = function () {
         $(".reviews-slick ").slick({
           infinite: true,
-          centerMode: true,
-          centerPadding: "30px",
           slidesToShow: 2,
           slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 2000,
-          adaptiveHeight: true,
           responsive: [
             {
-              breakpoint: 769,
+              breakpoint: 768,
               settings: {
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                dots: true,
+                arrows: false,
               },
             },
             // You can unslick at a given breakpoint now by adding:
