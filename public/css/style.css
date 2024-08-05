@@ -538,7 +538,7 @@ body {
 .projects-section {
   position: relative;
   width: 100%;
-  padding: 30px 50px 120px 50px;
+  padding: 30px 50px 150px 50px;
   background-image: linear-gradient(
     180deg,
     rgb(255, 255, 255),
@@ -702,7 +702,7 @@ body {
   text-align: center;
   margin-top: 100px;
   margin-bottom: 20px;
-  font-size: 2rem;
+  font-size: 60px;
   font-family: "Gemunu Libre", sans-serif;
 }
 .review-box {
@@ -811,7 +811,7 @@ body {
   flex-direction: column;
   text-align: center;
 }
-.contact-heading > h1 {
+.contact-heading > h2 {
   font-family: "Gemunu Libre", sans-serif;
   font-size: 55px;
 }
@@ -821,7 +821,7 @@ body {
   color: rgb(73, 73, 73);
   font-size: 20px;
   margin: 20px auto;
-  font-family: "Gemunu Libre", sans-serif;
+  font-family: "lato", sans-serif;
 }
 .contact-heading > img {
   width: 100px;
@@ -877,6 +877,14 @@ textarea:hover {
   height: 20px;
   width: 20px;
   margin-right: 10px;
+}
+.contact-section a {
+  text-decoration: none;
+  color: #000;
+}
+.contact-heading > img:hover {
+  transform: scale(1.1);
+  transition: all 200ms ease;
 }
 
 /* FOOTER */

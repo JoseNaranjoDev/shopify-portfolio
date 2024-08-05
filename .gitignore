@@ -3,3 +3,4 @@ node_modules/
 video/
 *.mp4
 *.sfk
+config.env

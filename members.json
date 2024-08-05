@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Jose Naranjo",
+    "email": "jose-juan-naranjo@hotmail.com",
+    "wishlist": [
+      {
+        "item": "Tesla Model S",
+        "price": 100000,
+        "variant_id": 123456789
+      },
+      {
+        "item": "Tesla Model 3",
+        "price": 50000,
+        "variant_id": 987654321
+      }
+    ]
+  },
+  {
+    "name": "John Doe",
+    "email": "123John@yahoo.com",
+    "wishlist": [
+      {
+        "item": "Tesla Model Y",
+        "price": 60000,
+        "variant_id": 123456789
+      },
+      {
+        "item": "Tesla Model X",
+        "price": 90000,
+        "variant_id": 987654321
+      }
+    ]
+  }
+]

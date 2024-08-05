@@ -1,28 +1,28 @@
 const hamburgerIcon = document.getElementById("hamburger-icon");
 // CONTACT FORM SECURE BOX
-const hiddenInput = document.getElementById("contact_email");
-const submitBtn = document.getElementById("contact_submit_btn");
-const disabledBtn = document.getElementById("disabled_btn");
-const formCheckBox = document.querySelector("#not_a_robot");
-const formBox = document.querySelector("#form_box");
+//const hiddenInput = document.getElementById("contact_email");
+//const submitBtn = document.getElementById("contact_submit_btn");
+//const disabledBtn = document.getElementById("disabled_btn");
+//const formCheckBox = document.querySelector("#not_a_robot");
+//const formBox = document.querySelector("#form_box");
 
-formCheckBox.addEventListener("change", function () {
-  if (this.checked && hiddenInput.value.length == 0) {
-    //<button class="hidden" id="contact_submit_btn" type="submit" name="submit">SEND</button>
-    const sendBtn = document.createElement("button");
-    sendBtn.setAttribute("type", "submit");
-    sendBtn.setAttribute("id", "contact_submit_btn");
-    sendBtn.setAttribute("name", "submit");
-    sendBtn.textContent = "SEND";
-    formBox.appendChild(sendBtn);
-    disabledBtn.classList.add("hidden");
-  } else {
-    let d = document.getElementById("form_box");
-    let d_nested = document.getElementById("contact_submit_btn");
-    d.removeChild(d_nested);
-    disabledBtn.classList.remove("hidden");
-  }
-});
+// formCheckBox.addEventListener("change", function () {
+//   if (this.checked && hiddenInput.value.length == 0) {
+//     //<button class="hidden" id="contact_submit_btn" type="submit" name="submit">SEND</button>
+//     const sendBtn = document.createElement("button");
+//     sendBtn.setAttribute("type", "submit");
+//     sendBtn.setAttribute("id", "contact_submit_btn");
+//     sendBtn.setAttribute("name", "submit");
+//     sendBtn.textContent = "SEND";
+//     formBox.appendChild(sendBtn);
+//     disabledBtn.classList.add("hidden");
+//   } else {
+//     let d = document.getElementById("form_box");
+//     let d_nested = document.getElementById("contact_submit_btn");
+//     d.removeChild(d_nested);
+//     disabledBtn.classList.remove("hidden");
+//   }
+// });
 
 hamburgerIcon.addEventListener("click", function () {
   const navLinksMobile = document.getElementById("nav-links-mobile");
@@ -55,6 +55,7 @@ if (window.innerWidth >= 780) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOM loaded");
   const profileBox = document.getElementById("profile-box");
   const profileImg = profileBox.querySelector("img");
   profileImg.style.display = "block";
