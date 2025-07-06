@@ -6,7 +6,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import mongoose from "mongoose";
-import pagesRouter from "./routes/pageRoutes.js";
+//import pagesRouter from "./routes/pageRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import "./server/cron.js";
 
@@ -29,6 +29,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const portfolioData = JSON.parse(fs.readFileSync("public/portfolio-data.json"));
 const shopId = configData.shopId;
+
 // BODY PARSER MIDDLEWARE
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -94,7 +95,4 @@ app.get("/api/get-token", (req, res) => {
   });
 });
 
-// SERVER
-app.listen(process.env.PORT, () => {
-  console.log("App listening on port 3005");
-});
+export default app;

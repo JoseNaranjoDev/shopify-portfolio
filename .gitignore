@@ -5,3 +5,4 @@ video/
 *.sfk
 config.env
 Mongo DB.txt
+server/*
