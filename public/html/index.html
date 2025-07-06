@@ -28,11 +28,6 @@
 
     <title>Shopify | JoseNaranjo.DEV</title>
 
-    <script
-      src="https://www.googleoptimize.com/optimize.js?id=OPT-MQKZ3DD"
-      defer
-    ></script>
-
     <!-- Hotjar Tracking Code for Shopify Portfolio -->
     <script defer>
       (function (h, o, t, j, a, r) {
@@ -52,8 +47,8 @@
 
     <!-- Google tag (gtag.js) -->
     <script
-      src="https://www.googletagmanager.com/gtag/js?id=G-X6F8YJHMDS"
-      defer
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-6X4ZRD93YC"
     ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -62,7 +57,7 @@
       }
       gtag("js", new Date());
 
-      gtag("config", "G-X6F8YJHMDS");
+      gtag("config", "G-6X4ZRD93YC");
     </script>
 
     <link
@@ -76,27 +71,12 @@
       rel="stylesheet"
       onload="if(media!=='all')media='all'"
     />
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-213857088-1"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "UA-213857088-1");
-    </script>
   </head>
 
   <body>
     <nav class="nav">
       <div class="title">
-        <a href="/"> JOSENARANJO.DEV </a>
+        <a href="/">WEBECOM</a>
       </div>
 
       <ul class="nav-links">
@@ -137,8 +117,8 @@
 
     <header class="header">
       <div class="header-title">
-        <h1>Shopify Expert with Shopify Solutions</h1>
-        <h2>Setup | Customize | Manage | Sell</h2>
+        <h1>Shopify Solutions</h1>
+        <h2>Full Shopify Setup | Theme Customizations | Ready for Launch!</h2>
       </div>
 
       <div class="heading">
@@ -789,48 +769,20 @@
         target="_blank"
       >
         <div class="contact-heading">
-          <h2>Contact</h2>
+          <h2>Contact Form Click Here</h2>
           <img src="../img/contact-phone.png" alt="phone logo" />
         </div>
       </a>
-
-      <!-- Form spark action="https://submit-form.com/RjCqfG6o" -->
-
-      <!-- <form id="form_box" class="form" action="/send" method="POST">
-        <label for="contact-name">Name:</label>
-        <input id="contact-name" type="text" name="name" required /> -->
-
-      <!--  *********   -->
-      <!-- <label for="contact_email" style="display: none">Email:</label>
-        <input id="contact_email" style="display: none" name="email" /> -->
-      <!--  *********   -->
-
-      <!-- <label for="contact_email_2">Email:</label>
-        <input id="contact_email_2" type="email" name="emailee" required />
-
-        <label for="contact_message">Message:</label>
-        <textarea id="contact_message" name="message" rows="8"></textarea>
-        <br />
-        <div id="secure_box" class="secure-box">
-          <div style="display: inline">
-            <input id="not_a_robot" type="checkbox" class="checkbox-input" />
-          </div>
-          <div style="display: inline">
-            <label for="not_a_robot">I am NOT a robot</label>
-          </div>
-        </div>
-        <a
-          style="
-            background-color: lightgrey;
-            cursor: default;
-            text-align: center;
-            width: 50px;
-            margin: 31px auto;
-          "
-          id="disabled_btn"
-          >SEND</a
-        >
-      </form> -->
+      <h2 class="calendly-heading">Schedule 30 min Meeting</h2>
+      <div class="calendly-cont">
+        <!-- Calendly inline widget begin -->
+        <div
+          class="calendly-inline-widget"
+          data-url="https://calendly.com/jose-n/30min?hide_event_type_details=1"
+          style="min-width: 320px; height: 700px"
+        ></div>
+        <!-- Calendly inline widget end -->
+      </div>
     </section>
 
     <!-- FOOTER  -->
@@ -851,8 +803,13 @@
       </div>
     </footer>
 
-    <script src="../js/index.js" defer></script>
-    <script type="text/javascript" src="../js/slick.min.js" defer></script>
+    <script
+      type="text/javascript"
+      src="https://assets.calendly.com/assets/external/widget.js"
+      async
+    ></script>
+    <script src="../js/index.js" defer="defer"></script>
+    <script type="text/javascript" src="../js/slick.min.js"></script>
     <script type="text/javascript">
       $.fn.initializeSlickCarousel = function () {
         $(".reviews-slick ").slick({
