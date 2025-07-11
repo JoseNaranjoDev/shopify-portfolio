@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 //import pagesRouter from "./routes/pageRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import "./server/cron.js";
+import sgMail from "@sendgrid/mail";
 
 const app = express();
 const configData = JSON.parse(fs.readFileSync("./server/config.json", "utf8"));
@@ -94,5 +95,74 @@ app.get("/api/get-token", (req, res) => {
     data: { accessToken: LONG_LIVED_TOKEN },
   });
 });
+app.options("/api/contact-data", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Or your allowed domain
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, X-Shopify-Shop-Domain"
+  );
+  res.status(200).end();
+});
 
-export default app;
+app.post("/api/contact-data", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Or your domain
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, X-Shopify-Shop-Domain"
+  );
+
+  const shopDomain = req.headers["x-shopify-shop-domain"];
+  const {
+    name,
+    email,
+    phone,
+    wheel,
+    frontDiameter,
+    frontWidth,
+    rearDiameter,
+    rearWidth,
+  } = req.body;
+
+  res.status(200).end();
+
+  if (shopDomain === "variantwheels.com") {
+    console.log("Correct Shop Domain, Running SendMail!");
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    // sgMail.setDataResidency('eu');
+    // uncomment the above line if you are sending mail using a regional EU subuser
+
+    const msg = {
+      to: "jose@josenaranjo.dev", // Change to your recipient
+      from: "sales@variantwheels.com", // Change to your verified sender
+      subject: "Sending with SendGrid is Fun",
+      text: "and easy to do anywhere, even with Node.js",
+      html: `
+        <h2><strong>New Hulk Form Submit</strong></h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Wheel:</strong> ${wheel}</p>
+        <p><strong>Front Diameter:</strong> ${frontDiameter}</p>
+        <p><strong>Front Width:</strong> ${frontWidth}</p>
+        <p><strong>Rear Diameter:</strong> ${rearDiameter}</p>
+        <p><strong>Rear Width:</strong> ${rearWidth}</p>
+      `,
+    };
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log("Email sent");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    console.log("Not an authorized Domain");
+  }
+});
+
+const port = 3005;
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
+});

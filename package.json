@@ -10,6 +10,7 @@
   "author": "Jose Naranjo",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^8.1.5",
     "@shopify/hydrogen-react": "^2025.5.0",
     "@shopify/shopify-api": "^11.13.0",
     "axios": "^1.10.0",
