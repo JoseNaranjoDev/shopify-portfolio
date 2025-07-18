@@ -2,10 +2,12 @@
   "name": "portfolioapp",
   "version": "1.0.0",
   "description": "Jose Naranjo's Portfolio",
+  "type": "module",
   "main": "portfolio.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.mjs"
+    "start": "nodemon portfolio.mjs",
+    "startnode": "node portfolio.mjs"
   },
   "author": "Jose Naranjo",
   "license": "ISC",

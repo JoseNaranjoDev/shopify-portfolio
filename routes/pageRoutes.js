@@ -1,26 +1,8 @@
-const express = require("express");
+import express from "express";
+import { homePage } from "../controllers/pageController.js";
+
 const router = express.Router();
 
-// app.get("/xtempo", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public/html/xtempo.html"));
-// });
+router.route("/").get(homePage);
 
-// app.get("/socalwear", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public/html/socalwear.html"));
-// });
-
-// app.get("/starlinker", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public/html/starlinker.html"));
-// });
-
-// app.get("/coffeepots", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public/html/coffeepots.html"));
-// });
-
-const goToSocalWear = (req, res) => {
-  res.sendFile(path.join(__dirname, "public/html/socalwear.html"));
-};
-
-router.route("/").get(goToSocalWear);
-
-module.exports = router;
+export default router;

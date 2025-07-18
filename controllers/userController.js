@@ -1,7 +1,6 @@
-const fs = require("fs");
-const members = JSON.parse(fs.readFileSync("./members.json"));
+import User from "./../models/userModel.js";
 
-exports.getAllUsers = (req, res) => {
+export const getAllUsers = (req, res) => {
   res.status(200).json({
     status: "success",
     results: members.length,
@@ -10,27 +9,38 @@ exports.getAllUsers = (req, res) => {
     },
   });
 };
-exports.getUser = (req, res) => {
+export const getUser = (req, res) => {
   res.status(500).json({
     status: "error",
     message: "This route is yet not defined!",
   });
 };
-exports.updateUser = (req, res) => {
+export const updateUser = (req, res) => {
   res.status(500).json({
     status: "error",
     message: "This route is yet not defined!",
   });
 };
-exports.deleteUser = (req, res) => {
+export const deleteUser = (req, res) => {
   res.status(500).json({
     status: "error",
     message: "This route is yet not defined!",
   });
 };
-exports.createUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is yet not defined!",
-  });
+export const createUser = async (req, res) => {
+  try {
+    const newUser = await User.create(req.body);
+
+    res.status(500).json({
+      status: "success",
+      data: {
+        user: newUser,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err,
+    });
+  }
 };

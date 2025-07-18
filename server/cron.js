@@ -1,27 +1,38 @@
-const cron = require("node-cron");
-const dotenv = require("dotenv");
-const axios = require("axios");
-const nodemailer = require("nodemailer");
-const fs = require("fs");
+import cron from "node-cron";
+import dotenv from "dotenv";
+import axios from "axios";
+import nodemailer from "nodemailer";
+import fs from "fs";
 
+// Load env vars
 dotenv.config({ path: "./config.env" });
-const configData = JSON.parse(fs.readFileSync("./server/config.json", "utf8"));
-let LONG_LIVED_TOKEN;
-const recieveEmail = configData.emailUser;
-const emailPassword = configData.emailPass;
 
-// CRON JOB - NODEMAILER
-// Function to refresh Instagram long-lived access token
+const configData = JSON.parse(
+  fs.readFileSync("./server/gelatoInstagramToken.json", "utf8")
+);
+const webecomData = JSON.parse(
+  fs.readFileSync("./server/webecomDB.json", "utf8")
+);
+
+let LONG_LIVED_TOKEN;
+const recieveEmail = webecomData.emailUser;
+const emailPassword = webecomData.emailPass;
+
+// Function to load the token
 function loadToken() {
   try {
-    const data = fs.readFileSync("./server/config.json", "utf8");
-    const config = JSON.parse(data);
-    LONG_LIVED_TOKEN = config.instagramToken;
-    //console.log(LONG_LIVED_TOKEN);
+    const gelatoData = fs.readFileSync(
+      "./server/gelatoInstagramToken.json",
+      "utf8"
+    );
+    const gelatoDataParsed = JSON.parse(gelatoData);
+    LONG_LIVED_TOKEN = gelatoDataParsed.instagramToken;
   } catch (error) {
     console.error("Error loading token:", error.message);
   }
 }
+
+// Function to refresh Instagram token
 async function refreshInstagramToken() {
   try {
     const response = await axios.get(
@@ -33,21 +44,26 @@ async function refreshInstagramToken() {
         },
       }
     );
+
     const newToken = response.data.access_token;
     const expiresIn = response.data.expires_in;
     LONG_LIVED_TOKEN = newToken;
+
     fs.writeFileSync(
-      "./server/config.json",
+      "./server/gelatoInstagramToken.json",
       JSON.stringify(
-        { instagramToken: newToken, lastUpdated: new Date() },
+        {
+          instagramToken: newToken,
+          lastUpdated: new Date(),
+          expiresIn: expiresIn,
+        },
         null,
         2
       ),
       "utf8"
     );
-    console.log(
-      `Token refreshed and saved: ${newToken}, Expires in: ${expiresIn} seconds`
-    );
+
+    console.log(`Token refreshed and saved: ${newToken}`);
   } catch (error) {
     console.error(
       "Error refreshing Instagram token:",
@@ -56,7 +72,30 @@ async function refreshInstagramToken() {
   }
 }
 
-// Schedule cron job to run every 30 days
+// Function to send email
+async function sendEmail() {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: recieveEmail,
+      pass: emailPassword,
+    },
+  });
+
+  try {
+    const info = await transporter.sendMail({
+      from: "jose@josenaranjo.dev",
+      to: "jose@josenaranjo.dev",
+      subject: "Instagram token refreshed",
+      text: `Long lived Access token is: ${LONG_LIVED_TOKEN}`,
+    });
+    console.log("Email sent:", info.response);
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+}
+
+// Schedule cron job
 cron.schedule(
   "0 0 1 * *",
   () => {
@@ -70,30 +109,7 @@ cron.schedule(
   }
 );
 
-async function sendEmail() {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: recieveEmail, // <-- your Gmail address
-      pass: emailPassword, // <-- your app password (no spaces!)
-    },
-  });
-
-  try {
-    const info = await transporter.sendMail({
-      from: "jose@josenaranjo.dev", // must match auth.user
-      to: "jose@josenaranjo.dev",
-      subject: "Instagram token refreshed",
-      text: `Long lived Access token is: ${LONG_LIVED_TOKEN}`,
-    });
-    console.log("Email sent:", info.response);
-  } catch (error) {
-    console.error("Error sending email:", error);
-  }
-}
-
 loadToken();
-//refreshInstagramToken();
 
 // async function getInstagramToken() {
 //   try {
