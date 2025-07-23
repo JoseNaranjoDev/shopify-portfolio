@@ -1,13 +1,21 @@
-import User from "./../models/userModel.js";
+import User from "../models/userModel.js";
 
-export const getAllUsers = (req, res) => {
-  res.status(200).json({
-    status: "success",
-    results: members.length,
-    data: {
-      members,
-    },
-  });
+export const getAllUsers = async (req, res) => {
+  const users = await User.find();
+  try {
+    res.status(200).json({
+      status: "success",
+      results: users.length,
+      data: {
+        users,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
 };
 export const getUser = (req, res) => {
   res.status(500).json({

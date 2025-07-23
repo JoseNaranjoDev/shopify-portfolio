@@ -8,6 +8,9 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRoutes.js";
 import pageRouter from "./routes/pageRoutes.js";
+import tokenRouter from "./routes/tokenRoutes.js";
+import { AppError } from "./utils/appError.js";
+import { globalErrorHandler } from "./controllers/errorController.js";
 import "./server/cron.js";
 import sgMail from "@sendgrid/mail";
 
@@ -45,8 +48,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "pug");
 
 // ROUTES
-app.use("/", pageRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/tokens", tokenRouter);
 
 app.get("/signIn", (req, res) => {
   res.sendFile(path.join(__dirname, "server/portfolio-data.json"));
@@ -60,8 +63,6 @@ app.get("/api/get-token", (req, res) => {
       message: "Invalid or missing shop ID",
     });
   }
-  console.log("current Token:");
-  console.log(gelatoTokenData.instagramToken);
   res.status(200).json({
     status: "success",
     data: { accessToken: gelatoTokenData.instagramToken },
@@ -291,13 +292,11 @@ app.post("/api/contact-data", async (req, res) => {
     console.log("Not an authorized Domain");
   }
 });
-
+app.use("/", pageRouter);
 app.all("*", (req, res, next) => {
-  res.status(404).json({
-    status: "fail",
-    message: `Can't find ${req.originalUrl} on this server!`,
-  });
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`));
 });
+app.use(globalErrorHandler);
 
 const port = 3005;
 app.listen(port, () => {
