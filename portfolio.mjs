@@ -15,9 +15,6 @@ import "./server/cron.js";
 import sgMail from "@sendgrid/mail";
 
 const app = express();
-const gelatoTokenData = JSON.parse(
-  fs.readFileSync("./server/gelatoInstagramToken.json", "utf8")
-);
 
 dotenv.config({ path: "./config.env" });
 
@@ -34,12 +31,10 @@ mongoose.connect(DB, {}).then(() => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const gelatoShopId = process.env.GELATO_SHOP_ID;
-
 // BODY PARSER MIDDLEWARE
-// if (process.env.NODE_ENV === "development") {
-//   app.use(morgan("dev"));
-// }
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
@@ -54,19 +49,6 @@ app.use("/api/v1/tokens", tokenRouter);
 app.get("/signIn", (req, res) => {
   res.sendFile(path.join(__dirname, "server/portfolio-data.json"));
   console.log(req.rawHeaders);
-});
-app.get("/api/get-token", (req, res) => {
-  const providedId = req.query.shopId;
-  if (!providedId || providedId !== gelatoShopId) {
-    return res.status(403).json({
-      status: "error",
-      message: "Invalid or missing shop ID",
-    });
-  }
-  res.status(200).json({
-    status: "success",
-    data: { accessToken: gelatoTokenData.instagramToken },
-  });
 });
 
 app.options("/api/contact-data", (req, res) => {

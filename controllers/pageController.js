@@ -35,3 +35,7 @@ export const homePage = (req, res) => {
   console.log(`Homepage visits: ${portfolioData.homepage_visits}`);
   console.log(`Members: ${portfolioData.members.length}`);
 };
+
+export const coffeepots = (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "html", "coffeepots.html"));
+};
