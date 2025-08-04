@@ -21,6 +21,7 @@ const userShcema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a password"],
     minLength: [8, "Password must be minimum of 8 characters"],
+    select: false,
   },
   passwordConfirm: {
     type: String,
