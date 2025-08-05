@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import userRouter from "./routes/userRoutes.js";
 import pageRouter from "./routes/pageRoutes.js";
 import tokenRouter from "./routes/tokenRoutes.js";
+import contactData from "./routes/emailRoutes.js";
 import { AppError } from "./utils/appError.js";
 import { globalErrorHandler } from "./controllers/errorController.js";
 import "./server/cron.js";
@@ -43,6 +44,7 @@ app.set("view engine", "pug");
 // ROUTES
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/tokens", tokenRouter);
+app.use("/api/v1/contact-data", contactData);
 
 app.use("/", pageRouter);
 app.all("*", (req, res, next) => {

@@ -30,8 +30,35 @@ if (window.innerWidth >= 780) {
   videoSource.setAttribute("src", "../video/portfolio-cta.mp4");
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const profileBox = document.getElementById("profile-box");
-  const profileImg = profileBox.querySelector("img");
-  profileImg.style.display = "block";
-});
+//Contact Form Handler
+document
+  .getElementById("homepageContactForm")
+  .addEventListener("submit", async (e) => {
+    console.log("form event happening!");
+    e.preventDefault(); // Prevent page reload
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/v1/contact-data/homepagecontactform", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (result.success) {
+        alert(result.message); // Show success alert
+        e.target.reset(); // Optional: Reset form
+      } else {
+        alert(result.message); // Show error alert
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again.");
+    }
+  });

@@ -1,6 +1,54 @@
 import dotenv from "dotenv";
 import sgMail from "@sendgrid/mail";
+import nodemailer from "nodemailer";
 dotenv.config({ path: "./config.env" });
+const recieveEmail = process.env.CONTACT_FORM_USER;
+const emailPassword = process.env.CONTACT_FORM_PASSWORD;
+
+export const contactFormEmail = (req, res) => {
+  console.log("Homepage form Submission route hit!");
+  const { name, email, message } = req.body;
+  // Function to send email
+  async function sendEmail() {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: recieveEmail,
+        pass: emailPassword,
+      },
+    });
+
+    try {
+      const info = await transporter.sendMail({
+        from: "jose@josenaranjo.dev",
+        to: "jose@josenaranjo.dev",
+        subject: "New Webecom Form Submission",
+        text: `
+        <h3>Name: ${name}</h3>
+        <h3>Email: ${email}</h3>
+        <p>Message: ${message}</p>
+        `,
+      });
+      console.log("Email sent:", info.response);
+      return true; // Indicate success
+    } catch (error) {
+      console.error("Error sending email:", error);
+      throw error; // Propagate error
+    }
+  }
+
+  sendEmail()
+    .then(() => {
+      res
+        .status(200)
+        .json({ success: true, message: "Message sent successfully!" });
+    })
+    .catch((error) => {
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to send message." });
+    });
+};
 
 export const VariantWheelsAccess = (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); // Or your allowed domain

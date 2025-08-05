@@ -3,28 +3,20 @@ import dotenv from "dotenv";
 import axios from "axios";
 import nodemailer from "nodemailer";
 import fs from "fs";
-
-// Load env vars
 dotenv.config({ path: "./config.env" });
 
-const configData = JSON.parse(
-  fs.readFileSync("./server/gelatoInstagramToken.json", "utf8")
+const gelatoData = fs.readFileSync(
+  "./server/gelatoInstagramToken.json",
+  "utf8"
 );
-const webecomData = JSON.parse(
-  fs.readFileSync("./server/webecomDB.json", "utf8")
-);
-
+// Email & password
 let LONG_LIVED_TOKEN;
-const recieveEmail = webecomData.emailUser;
-const emailPassword = webecomData.emailPass;
+const recieveEmail = process.env.CONTACT_FORM_USER;
+const emailPassword = process.env.CONTACT_FORM_PASSWORD;
 
 // Function to load the token
 function loadToken() {
   try {
-    const gelatoData = fs.readFileSync(
-      "./server/gelatoInstagramToken.json",
-      "utf8"
-    );
     const gelatoDataParsed = JSON.parse(gelatoData);
     LONG_LIVED_TOKEN = gelatoDataParsed.instagramToken;
   } catch (error) {
