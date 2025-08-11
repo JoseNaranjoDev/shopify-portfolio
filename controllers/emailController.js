@@ -24,9 +24,9 @@ export const contactFormEmail = (req, res) => {
         to: "jose@josenaranjo.dev",
         subject: "New Webecom Form Submission",
         text: `
-        <h3>Name: ${name}</h3>
-        <h3>Email: ${email}</h3>
-        <p>Message: ${message}</p>
+        Name: ${name}
+        Email: ${email}
+        Message: ${message}
         `,
       });
       console.log("Email sent:", info.response);

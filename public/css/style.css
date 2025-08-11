@@ -17,7 +17,24 @@
   font-family: "Gemunu Libre", sans-serif;
   color: rgb(36, 36, 36);
 }
+.center {
+  text-align: center;
+}
 .body-text {
+  font-size: 20px;
+  font-family: "lato", sans-serif;
+  color: rgb(83, 83, 83);
+  line-height: 1.4;
+  letter-spacing: 1.2px;
+}
+.light-body-text {
+  font-size: 20px;
+  font-family: "lato", sans-serif;
+  color: #cecece;
+  line-height: 1.4;
+  letter-spacing: 1.2px;
+}
+.card-body-text {
   font-size: 20px;
   font-family: "lato", sans-serif;
   color: rgb(83, 83, 83);
@@ -81,7 +98,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(149, 191, 71);
 }
 @keyframes pop-out {
   0% {
@@ -204,7 +220,7 @@ body {
       rgba(0, 0, 0, 0.651),
       rgba(41, 41, 41, 0.836)
     ),
-    url("../img/Header-background-mq.webp");
+    url("../img/Jewelry-Hero-landscape.jpg?width=1920&height=1080");
 
   background-size: cover;
   /* animation: 2.5s zoom-world ease; */
@@ -219,8 +235,10 @@ body {
   }
 }
 .header-title {
+  width: 100%;
+  max-width: 900px;
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 50%;
   transform: translateX(-50%);
   color: rgb(219, 219, 219);
@@ -236,6 +254,8 @@ body {
   color: goldenrod;
   font-weight: 600;
   font-family: "Gemunu Libre", sans-serif;
+  letter-spacing: 1.2px;
+  line-height: 30px;
 }
 .heading {
   position: absolute;
@@ -321,7 +341,6 @@ body {
 
 /* PORTFOLIO CTA VIDEO  */
 .portfolio-cta-section {
-  padding: 80px 0;
   height: 600px;
   display: flex;
   flex-direction: column;
@@ -383,6 +402,9 @@ body {
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+.background-1 {
+  background-image: linear-gradient(0deg, rgb(1 59 83) 33%, #222236 50%);
+}
 .service-box {
   position: relative;
   padding: 15px 5px 15px 20px;
@@ -394,7 +416,6 @@ body {
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  background-color: rgb(34 34 54);
   transition: all 200ms linear;
 }
 .imghead {
@@ -636,7 +657,6 @@ body {
   width: 100%;
   margin-top: -100px;
   padding: 150px 0 100px 0;
-  background-image: linear-gradient(0deg, rgb(1 59 83) 33%, #222236 50%);
   color: white;
   clip-path: polygon(0 0, 100% 0%, 100% 95%, 50% 100%, 0 95%);
   z-index: 10;
@@ -669,20 +689,20 @@ body {
   flex-direction: column;
   justify-content: flex-start;
 }
-.about-me-bio > .biotext {
+.biotext {
+  margin-left: 25px;
   padding-left: 10px;
-  max-width: 325px;
-  color: rgb(224, 224, 224);
-  line-height: 23px;
+  max-width: 450px;
 }
 .skills-cont {
-  margin: 60px 0;
+  padding: 60px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgb(1 59 83);
 }
 .skills-cont h2 {
-  color: #fff;
+  color: goldenrod;
   font-size: 40px;
   font-family: "Gemunu Libre", sans-serif;
 }
@@ -700,12 +720,14 @@ body {
 }
 .skill-set-box {
   width: 200px;
+  height: 160px;
   text-align: center;
   padding: 5px;
   border: none;
 }
 .skill-set-box > img {
   width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 .skill-set-box-padding {
@@ -878,7 +900,43 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-
+.img-text-cont {
+  display: flex;
+  padding: 45px 40px;
+  max-width: 1200px;
+  margin: 20px auto 60px auto;
+  flex-wrap: wrap;
+}
+.img-text-cont-2 {
+  display: flex;
+  padding: 45px 40px;
+  max-width: 1200px;
+  margin: 20px auto 0 auto;
+  flex-wrap: wrap;
+}
+.img-text-text,
+.img-text-img {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-content-box {
+  width: 100%;
+  max-width: 500px;
+}
+.text-content-box h2 {
+  font-size: 30px;
+  font-family: "Gemunu Libre", sans-serif;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.img-text-img img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  box-shadow: 15px 15px #000;
+}
 /* // Media Queries  */
 @media only screen and (max-width: 1024px) {
   .header-title {
@@ -1086,7 +1144,7 @@ button:hover {
 @media only screen and (max-width: 520px) {
   /* MEDIA 520 */
   .header {
-    height: 70vh;
+    height: 90vh;
     background-size: cover;
     background-position: center;
     animation: none;
@@ -1111,6 +1169,7 @@ button:hover {
   }
   .header-title > h1 {
     margin-bottom: 30px;
+    line-height: 0.9;
   }
   .header-title > h2 {
     margin-bottom: 30px;

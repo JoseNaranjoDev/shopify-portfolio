@@ -29,3 +29,13 @@ export const homePage = (req, res) => {
 export const coffeepots = (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "html", "coffeepots.html"));
 };
+export const privacyPolicy = (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "public", "html", "privacy-policy.html")
+  );
+};
+export const termsOfService = (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "public", "html", "terms-of-service.html")
+  );
+};
