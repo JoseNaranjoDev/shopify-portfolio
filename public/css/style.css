@@ -1,3 +1,8 @@
+.h1 {
+  font-size: 32px;
+  font-family: "Gemunu Libre", sans-serif;
+  color: #000;
+}
 .h2 {
   font-family: "Gemunu Libre", sans-serif;
   color: #000;
@@ -7,7 +12,29 @@
   font-family: "Gemunu Libre", sans-serif;
   color: goldenrod;
 }
+.h4 {
+  font-size: 26px;
+  font-family: "Gemunu Libre", sans-serif;
+  color: rgb(36, 36, 36);
+}
+.center {
+  text-align: center;
+}
 .body-text {
+  font-size: 20px;
+  font-family: "lato", sans-serif;
+  color: rgb(83, 83, 83);
+  line-height: 1.4;
+  letter-spacing: 1.2px;
+}
+.light-body-text {
+  font-size: 20px;
+  font-family: "lato", sans-serif;
+  color: #cecece;
+  line-height: 1.4;
+  letter-spacing: 1.2px;
+}
+.card-body-text {
   font-size: 20px;
   font-family: "lato", sans-serif;
   color: rgb(83, 83, 83);
@@ -71,7 +98,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(149, 191, 71);
 }
 @keyframes pop-out {
   0% {
@@ -194,9 +220,9 @@ body {
       rgba(0, 0, 0, 0.651),
       rgba(41, 41, 41, 0.836)
     ),
-    url("../img/Header-background-mq.webp");
+    url("../img/Jewelry-Hero-landscape.jpg?width=1920&height=1080");
 
-  background-size: 100% 100%;
+  background-size: cover;
   /* animation: 2.5s zoom-world ease; */
   z-index: 2;
 }
@@ -209,44 +235,28 @@ body {
   }
 }
 .header-title {
-  padding-top: 120px;
+  width: 100%;
+  max-width: 900px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
   color: rgb(219, 219, 219);
   text-align: center;
-
-  /* animation: fade-in-header-title 3s linear; */
 }
 .header-title > h1 {
+  margin-bottom: 10px;
   font-size: 60px;
   font-family: "Gemunu Libre", sans-serif;
 }
 .header-title > h2 {
+  margin-bottom: 10px;
   color: goldenrod;
   font-weight: 600;
   font-family: "Gemunu Libre", sans-serif;
+  letter-spacing: 1.2px;
+  line-height: 30px;
 }
-@keyframes fade-in-header-title {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.hexagon {
-  position: absolute;
-  left: 42%;
-  top: 24%;
-  z-index: -1;
-  transition: all 2s;
-}
-.hexagon-img {
-  height: 300px;
-}
-
 .heading {
   position: absolute;
   top: 55%;
@@ -258,20 +268,8 @@ body {
   border-radius: 20px;
   color: white;
   z-index: 5;
+}
 
-  /* animation: fade-in 4s ease; */
-}
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 .header-logo {
   width: 400px;
   position: absolute;
@@ -279,68 +277,11 @@ body {
   left: -80px;
   z-index: 3;
   opacity: 0.3;
-  /* animation: 3s zoom-logo ease; */
 }
-@keyframes zoom-logo {
-  0% {
-    left: -250px;
-    top: 200px;
-  }
-  99% {
-    left: -80px;
-    top: 100px;
-  }
-}
-.profile {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.profile-pic {
-  width: 100%;
-  object-fit: contain;
-  filter: contrast(0.9);
-  border-radius: 50%;
-}
-.profile > h2 {
-  margin-top: 5px;
-  font-size: 20px;
-  color: rgb(218, 216, 216);
-  border: 1px solid white;
-  background-color: rgba(0, 0, 0, 0.493);
-  text-align: center;
-  font-family: "Gemunu Libre", sans-serif;
-}
-.heading-logo {
-  width: 100%;
-  /* background-color: black; */
-  border-radius: 5px;
-  padding: 5px;
-}
-.heading-text {
-  position: relative;
-  margin: 0 0 0 30px;
-  padding: 70px 0 0 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  font-family: "Gemunu Libre", sans-serif;
-}
-.heading-text > h2 {
-  color: rgb(149, 191, 71);
-  text-align: center;
-  font-size: 2.5em;
-  background-color: black;
-  border: 1px solid white;
-  border-radius: 10px;
-  font-family: "lato", sans-serif;
-}
-
-.heading-text > a {
-  width: 50%;
-  padding: 10px;
-  margin: 10px auto;
+.hero-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  margin: 10px 0;
   color: white;
   background-color: rgb(68 105 0);
   border-radius: 5px;
@@ -351,12 +292,7 @@ body {
   cursor: pointer;
   transition: all 300ms ease;
 }
-.heading-text > a:hover {
-  background-color: rgb(211, 236, 164);
-  color: black;
-  transition: all 300ms ease;
-  box-shadow: 0 0 10px 3px white;
-}
+
 .text-change {
   width: 500px;
   position: absolute;
@@ -405,14 +341,11 @@ body {
 
 /* PORTFOLIO CTA VIDEO  */
 .portfolio-cta-section {
-  padding: 80px 0;
-  height: 90vh;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(33 35 43);
-  border-top: 30px solid #000;
   clip-path: polygon(0 0, 100% 0%, 100% 95%, 50% 100%, 0 95%);
 }
 .portfolio-cta-section > h2 {
@@ -425,7 +358,7 @@ body {
   color: white;
 }
 .portfolio-cta-video {
-  width: 95%;
+  width: 100%;
   max-width: 530px;
   margin: 30px 0;
 }
@@ -469,6 +402,9 @@ body {
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+.background-1 {
+  background-image: linear-gradient(0deg, rgb(1 59 83) 33%, #222236 50%);
+}
 .service-box {
   position: relative;
   padding: 15px 5px 15px 20px;
@@ -480,7 +416,6 @@ body {
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  background-color: rgb(34 34 54);
   transition: all 200ms linear;
 }
 .imghead {
@@ -722,7 +657,6 @@ body {
   width: 100%;
   margin-top: -100px;
   padding: 150px 0 100px 0;
-  background-color: rgb(32, 35, 46);
   color: white;
   clip-path: polygon(0 0, 100% 0%, 100% 95%, 50% 100%, 0 95%);
   z-index: 10;
@@ -736,53 +670,49 @@ body {
 .about-me-cont {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 40px;
 }
 .about-me-img {
   width: 50%;
-  padding: 40px 0 0 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 .about-me-img > img {
-  width: 40%;
-  min-width: 250px;
-  padding: 32px 20px 0 0;
+  padding-right: 10px;
 }
 .about-me-bio {
   font-family: "lato", sans-serif;
   width: 50%;
-  padding: 40px;
   display: flex;
-  justify-content: flex-start;
   flex-direction: column;
-  justify-content: center;
-}
-.about-me-bio > p {
-  color: rgb(224, 224, 224);
-  line-height: 23px;
-}
-.about-me-bio > h2 {
-  margin-bottom: 10px;
-  font-size: 30px;
-  color: rgb(218, 165, 32);
+  justify-content: flex-start;
 }
 .biotext {
-  width: 100%;
+  margin-left: 25px;
+  padding-left: 10px;
+  max-width: 450px;
 }
-.name {
-  color: white !important;
+.skills-cont {
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(1 59 83);
+}
+.skills-cont h2 {
+  color: goldenrod;
+  font-size: 40px;
+  font-family: "Gemunu Libre", sans-serif;
 }
 .skill-set {
   padding: 20px 15px;
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   align-items: center;
   font-size: 30px;
-  font-family: "Gemunu Libre", sans-serif;
-  box-shadow: inset 0 0 10px 0 black;
-  background-color: #6f6ead;
   border: none;
 }
 .skill-set:last-child {
@@ -790,12 +720,15 @@ body {
 }
 .skill-set-box {
   width: 200px;
+  height: 160px;
   text-align: center;
   padding: 5px;
   border: none;
 }
 .skill-set-box > img {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .skill-set-box-padding {
   padding: 50px 0;
@@ -803,7 +736,7 @@ body {
 /* CONTACT  */
 .contact-section {
   width: 100%;
-  padding: 50px 0;
+  padding: 50px 15px;
 }
 .contact-heading {
   display: flex;
@@ -928,9 +861,94 @@ footer {
 cite {
   margin: 20px;
 }
-
+.contact-heading-box {
+  padding: 0;
+  margin-bottom: 30px;
+}
+.contact-form {
+  padding: 50px 0;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+button {
+  font-size: 26px;
+  font-family: "Gemunu Libre", sans-serif;
+  background-color: #013b53;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #0056b3;
+}
+.img-text-cont {
+  display: flex;
+  padding: 45px 40px;
+  max-width: 1200px;
+  margin: 20px auto 60px auto;
+  flex-wrap: wrap;
+}
+.img-text-cont-2 {
+  display: flex;
+  padding: 45px 40px;
+  max-width: 1200px;
+  margin: 20px auto 0 auto;
+  flex-wrap: wrap;
+}
+.img-text-text,
+.img-text-img {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-content-box {
+  width: 100%;
+  max-width: 500px;
+}
+.text-content-box h2 {
+  font-size: 30px;
+  font-family: "Gemunu Libre", sans-serif;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.img-text-img img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  box-shadow: 15px 15px #000;
+}
 /* // Media Queries  */
-
+@media only screen and (max-width: 1024px) {
+  .header-title {
+    top: 35%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .header-title {
+    width: 90%;
+    top: 30%;
+  }
+}
 @media only screen and (max-width: 780px) {
   /* MEDIA 780 */
   .nav-links > li > a {
@@ -938,7 +956,7 @@ cite {
     margin-right: 10px;
   }
   .header {
-    height: 100vh;
+    height: 80vh;
   }
   .heading {
     top: 60%;
@@ -1046,7 +1064,8 @@ cite {
     gap: 20px;
   }
   .about-me-img > img {
-    width: 90%;
+    width: 100%;
+    padding: 0;
   }
   .footer-links > ul {
     justify-content: center;
@@ -1067,7 +1086,6 @@ cite {
     margin-right: 10px;
   }
   .header {
-    background-size: 160% 93%;
     background-position: center;
     animation: none;
   }
@@ -1126,9 +1144,13 @@ cite {
 @media only screen and (max-width: 520px) {
   /* MEDIA 520 */
   .header {
+    height: 90vh;
     background-size: cover;
     background-position: center;
     animation: none;
+  }
+  .header-title {
+    top: 20%;
   }
   .nav-links {
     margin: 0 auto;
@@ -1142,24 +1164,29 @@ cite {
     width: 60%;
     margin: 0 auto;
   }
-  .header-title {
-    padding-top: 86px;
-  }
-  .header-title > h1 {
-    font-size: 40px;
-  }
   .heading-text > a {
     width: 50%;
+  }
+  .header-title > h1 {
+    margin-bottom: 30px;
+    line-height: 0.9;
+  }
+  .header-title > h2 {
+    margin-bottom: 30px;
   }
   .text-change {
     width: 85%;
   }
   .portfolio-cta-video {
-    width: 95%;
+    width: 100%;
     max-width: 530px;
   }
+  .portfolio-cta-section {
+    padding: 30px 0;
+    height: 500px;
+  }
   .portfolio-cta-section > h2 {
-    font-size: 6vw;
+    font-size: 22px;
   }
   .services-container {
     padding: 0;
@@ -1179,7 +1206,7 @@ cite {
   }
   .projects-section {
     padding-top: 1px;
-    padding-bottom: 250px;
+    padding-bottom: 150px;
   }
   .project-heading {
     padding: 20px 0;
@@ -1202,14 +1229,24 @@ cite {
     width: 80%;
   }
   .about-me-cont {
+    padding: 0 15px;
     flex-direction: column;
     align-items: center;
   }
   .about-me-img {
-    width: 85%;
+    padding-top: 20px;
+    width: 100%;
   }
   .about-me-bio {
-    width: 85%;
+    width: 100%;
+    padding: 0;
+    margin-top: 15px;
+  }
+  .about-me-bio > .biotext {
+    padding: 0;
+    max-width: unset;
+    color: rgb(224, 224, 224);
+    line-height: 23px;
   }
   .form {
     width: 90%;
@@ -1229,12 +1266,6 @@ cite {
   .nav > ul > li > a {
     color: white;
     margin: 0 10px;
-  }
-  .header-title {
-    padding-top: 86px;
-  }
-  .header-title > h1 {
-    font-size: 33px;
   }
   .header {
     height: 100vh;

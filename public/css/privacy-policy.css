@@ -1,0 +1,24 @@
+.policy-main {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #555;
+  margin-top: 20px;
+}
+.policy-container {
+  max-width: 900px;
+  padding: 40px 0 60px;
+  margin: 0 auto;
+}
+.policy-header {
+  margin: 80px 0 60px;
+  display: flex;
+  justify-content: center;
+}
+.policy-header h1 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  text-align: center;
+  padding: 20px;
+}
