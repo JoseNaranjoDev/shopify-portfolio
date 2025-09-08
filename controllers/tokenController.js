@@ -7,6 +7,8 @@ const gelatoTokenData = JSON.parse(
 );
 export const getGelatoInstagramToken = (req, res) => {
   const referer = req.get("referer") || req.get("referrer");
+  console.log(referer);
+  console.log(req.params);
   if (
     !referer.includes("https://gelatopique.us/") ||
     !referer.includes("gelatopique.us")

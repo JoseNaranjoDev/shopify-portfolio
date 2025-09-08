@@ -51,6 +51,11 @@
 body {
   position: relative;
 }
+.section-heading {
+  margin: 20px 0 40px 0;
+  text-align: center;
+  font-size: 40px;
+}
 .nav {
   position: fixed;
   top: 0;
@@ -271,10 +276,11 @@ body {
 }
 
 .header-logo {
-  width: 400px;
+  width: 208px;
+  height: 260px;
   position: absolute;
-  top: 100px;
-  left: -80px;
+  bottom: 30px;
+  left: 100px;
   z-index: 3;
   opacity: 0.3;
 }
@@ -348,11 +354,10 @@ body {
   align-items: center;
   clip-path: polygon(0 0, 100% 0%, 100% 95%, 50% 100%, 0 95%);
 }
-.portfolio-cta-section > h2 {
-  display: inline-block;
-  color: rgb(149, 191, 71);
-  font-size: 35px;
-  font-family: "Gemunu Libre", sans-serif;
+.pcta-video-box {
+  padding: 20px;
+  outline: 3px solid #000;
+  border-radius: 15px;
 }
 .white {
   color: white;
@@ -360,7 +365,6 @@ body {
 .portfolio-cta-video {
   width: 100%;
   max-width: 530px;
-  margin: 30px 0;
 }
 
 /* SERVICES SECTION  */
@@ -468,6 +472,40 @@ body {
   transition: all 100ms ease;
 }
 
+/* Affiliate logos */
+.logo-section {
+  padding: 40px 0;
+}
+
+.logo-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.logo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-item img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .logo-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 /* PROJECT SECTION*/
 
 .projects-section {
@@ -902,9 +940,9 @@ button:hover {
 }
 .img-text-cont {
   display: flex;
+  justify-content: center;
   padding: 45px 40px;
-  max-width: 1200px;
-  margin: 20px auto 60px auto;
+  margin: 20px 0;
   flex-wrap: wrap;
 }
 .img-text-cont-2 {
@@ -917,6 +955,7 @@ button:hover {
 .img-text-text,
 .img-text-img {
   width: 50%;
+  max-width: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -947,6 +986,21 @@ button:hover {
   .header-title {
     width: 90%;
     top: 30%;
+  }
+  .pcta-video-box {
+    padding: 7px;
+    outline: 1px solid #000;
+  }
+  .pcta-video-box > video {
+    border-radius: 10px;
+  }
+  .img-text-text,
+  .img-text-img {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .img-text-cont {
+    flex-direction: column;
   }
 }
 @media only screen and (max-width: 780px) {
@@ -1067,6 +1121,17 @@ button:hover {
     width: 100%;
     padding: 0;
   }
+  .img-text-cont-2 {
+    padding: 20px 15px;
+  }
+  .biotext {
+    margin-left: 0;
+    padding-left: 0;
+    max-width: unset;
+  }
+  .skill-set-box {
+    width: 145px;
+  }
   .footer-links > ul {
     justify-content: center;
   }
@@ -1179,11 +1244,10 @@ button:hover {
   }
   .portfolio-cta-video {
     width: 100%;
-    max-width: 530px;
   }
   .portfolio-cta-section {
-    padding: 30px 0;
-    height: 500px;
+    padding: 30px 10px;
+    height: unset;
   }
   .portfolio-cta-section > h2 {
     font-size: 22px;
