@@ -151,6 +151,46 @@ const authController = {
       data: { users },
     });
   }),
+
+  protectPage: async (req, res, next) => {
+    try {
+      const token =
+        req.cookies && req.cookies.jwt && req.cookies.jwt !== "loggedout"
+          ? req.cookies.jwt
+          : null;
+      if (!token) {
+        return res.redirect("/login");
+      }
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = findById(decoded.id);
+      if (!user) {
+        return res.redirect("/login");
+      }
+      req.user = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      };
+      next();
+    } catch (err) {
+      return res.redirect("/login");
+    }
+  },
+
+  sendAdminToAdmin: (req, res, next) => {
+    if (req.user && req.user.role === "admin") {
+      return res.redirect("/admin");
+    }
+    next();
+  },
+
+  sendNonAdminToAccount: (req, res, next) => {
+    if (req.user && req.user.role !== "admin") {
+      return res.redirect("/account");
+    }
+    next();
+  },
 };
 
 export default authController;

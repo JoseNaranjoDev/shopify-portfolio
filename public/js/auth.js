@@ -107,7 +107,11 @@ async function bootAccount() {
   try {
     const data = await api("/api/v1/users/me");
     const u = data.data.user;
-    who.textContent = `${u.name} · ${u.email} · ${u.role}`;
+    const nameEl = document.getElementById("member-name");
+    if (nameEl) {
+      nameEl.textContent = u.name || "there";
+    }
+    who.textContent = u.role === "admin" ? "Administrator" : "Signed in as a member";
     if (location.pathname === "/admin") {
       if (u.role !== "admin") {
         location.href = "/account";

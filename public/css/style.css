@@ -1379,3 +1379,45 @@ button:hover {
     font-size: 20px;
   }
 }
+
+/* Header login / account icon */
+a.nav-auth {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: rgb(196, 196, 196);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 200ms ease;
+}
+a.nav-auth svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+a.nav-auth:hover,
+a.nav-auth:focus-visible {
+  color: #111;
+  background: rgb(149, 191, 71);
+  outline: none;
+}
+.nav > a.nav-auth {
+  position: absolute;
+  right: 16px;
+  top: 10px;
+  z-index: 12;
+}
+.mobile-auth {
+  margin-top: 28px;
+  padding: 12px 0;
+  display: flex;
+  justify-content: center;
+}
+@media only screen and (max-width: 780px) {
+  .nav:has(.hamburger-menu) > a.nav-auth {
+    right: 54px;
+    top: 5px;
+  }
+}
