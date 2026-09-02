@@ -1421,3 +1421,428 @@ a.nav-auth:focus-visible {
     top: 5px;
   }
 }
+
+/* ============================================================
+   Landing restyle — match login / account visual language
+   Tokens live in auth.css :root (--we-*)
+   ============================================================ */
+
+body {
+  background: var(--we-bg, #111);
+  color: var(--we-text, #eee);
+  font-family: var(--we-font-body, Lato, sans-serif);
+}
+
+.h1,
+.h2,
+.h4,
+.section-heading,
+.project-heading,
+.project-heading h2,
+.service-heading h2,
+.contact-heading > h2,
+.about-me > h2,
+.calendly-heading,
+.text-content-box h2,
+.cust-text-box h2 {
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif);
+  color: var(--we-heading, goldenrod);
+}
+
+.h3,
+.cust-text-box h3 {
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif);
+  color: var(--we-heading, goldenrod);
+}
+
+.body-text,
+.card-body-text,
+.light-body-text {
+  font-family: var(--we-font-body, Lato, sans-serif);
+  color: var(--we-text, #eee);
+}
+
+.card-body-text,
+.contact-heading > p,
+.members-sub {
+  color: var(--we-muted, #aaa);
+}
+
+.nav {
+  background-color: var(--we-bg, #111);
+}
+
+.nav-links-mobile {
+  background: var(--we-surface, #1c1c1c);
+}
+
+/* Hero: gold heading, muted subcopy, green CTA */
+.header-title > h1 {
+  color: var(--we-heading, goldenrod);
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif);
+}
+.header-title > h2 {
+  color: var(--we-muted, #aaa);
+  font-family: var(--we-font-body, Lato, sans-serif);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.hero-btn,
+a.hero-btn,
+a.hero-btn.h4 {
+  display: inline-block;
+  padding: 12px 22px;
+  margin: 16px 0 10px;
+  color: var(--we-ink, #111);
+  background: var(--we-accent, rgb(149, 191, 71));
+  border: 0;
+  border-radius: var(--we-radius-control, 4px);
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+.hero-btn:hover,
+a.hero-btn:hover,
+a.hero-btn.h4:hover {
+  opacity: 0.9;
+  color: var(--we-ink, #111);
+  background: var(--we-accent, rgb(149, 191, 71));
+}
+
+/* Kill clashing bright / teal leftover panels */
+.background-1 {
+  background: var(--we-bg, #111);
+  background-image: none;
+}
+
+.portfolio-cta-section {
+  background: var(--we-bg, #111);
+  clip-path: none;
+  height: auto;
+  min-height: 0;
+  padding: 72px 24px;
+}
+.pcta-video-box {
+  outline: 1px solid var(--we-input, #2a2a2a);
+  border-radius: var(--we-radius-card, 8px);
+  background: var(--we-surface, #1c1c1c);
+  padding: 16px;
+}
+
+.logo-section {
+  background: var(--we-bg, #111);
+  padding: 72px 20px;
+}
+.section-heading {
+  margin: 0 0 40px;
+}
+
+img[src*="shopify_logo_black"] {
+  filter: brightness(0) invert(1);
+}
+
+.img-text-cont,
+.img-text-cont-2 {
+  padding: 72px 40px;
+}
+.img-text-img img {
+  box-shadow: none;
+  border-radius: var(--we-radius-card, 8px);
+}
+
+/* Services — auth-card siblings */
+.services-section {
+  background: var(--we-bg, #111);
+  padding: 80px 20px 88px;
+}
+.service-heading {
+  margin: 0 10px 56px;
+  align-items: center;
+  gap: 12px;
+}
+.service-heading > h1,
+.service-heading > h2 {
+  margin-left: 10px;
+  font-size: 56px;
+  color: var(--we-heading, goldenrod);
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif);
+}
+.services-container {
+  padding: 0 20px;
+}
+.service-box,
+.service-box.background-1 {
+  background: var(--we-surface, #1c1c1c);
+  background-image: none;
+  border: 1px solid var(--we-input, #2a2a2a);
+  border-radius: var(--we-radius-card, 8px);
+  padding: 28px 20px 24px;
+  height: auto;
+  min-height: 305px;
+  margin: 36px 20px;
+}
+.service-info {
+  color: var(--we-text, #eee);
+  font-family: var(--we-font-body, Lato, sans-serif);
+}
+
+/* Full website builds + project tiles */
+.projects-cont {
+  padding: 0 20px 40px;
+}
+.project-heading {
+  color: var(--we-heading, goldenrod);
+  margin: 48px 0 40px;
+  padding: 0 20px;
+}
+.project-heading > h1,
+.project-heading > h2 {
+  color: var(--we-heading, goldenrod);
+  border: 0;
+  padding: 0;
+}
+.project-div {
+  background-color: var(--we-surface, #1c1c1c);
+  color: var(--we-text, #eee);
+  border: 1px solid var(--we-input, #2a2a2a);
+  border-radius: var(--we-radius-card, 8px);
+  box-shadow: none;
+  padding: 12px;
+  transition: opacity 200ms ease, border-color 200ms ease;
+}
+.project-div:hover {
+  box-shadow: none;
+  border-color: var(--we-accent, rgb(149, 191, 71));
+}
+.project-div > div > h2,
+.project-div h2 {
+  color: var(--we-text, #eee);
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif);
+}
+.project-div h3 {
+  color: var(--we-heading, goldenrod);
+  background-color: transparent;
+  border: 0;
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif);
+}
+
+/* Theme customizations — white panel gone */
+.projects-section {
+  background: var(--we-bg, #111);
+  background-image: none;
+  clip-path: none;
+  padding: 72px 50px 100px;
+  z-index: 5;
+}
+.customizations-cont {
+  padding: 20px 15px 40px;
+  gap: 28px;
+}
+.cust-box,
+.cust-box-long {
+  background: var(--we-surface, #1c1c1c);
+  border: 1px solid var(--we-input, #2a2a2a);
+  border-radius: var(--we-radius-card, 8px);
+  padding: 16px;
+  color: var(--we-text, #eee);
+}
+.cust-text-box p {
+  color: var(--we-muted, #aaa);
+}
+.cust-links-box a {
+  color: var(--we-heading, goldenrod);
+}
+.cust-links-box a:hover {
+  color: var(--we-accent, rgb(149, 191, 71));
+}
+
+/* About / skills */
+.about-me {
+  background: var(--we-bg, #111);
+  margin-top: 0;
+  padding: 80px 0 60px;
+  clip-path: none;
+  color: var(--we-text, #eee);
+}
+.skills-cont {
+  background-color: var(--we-surface, #1c1c1c);
+  border-radius: var(--we-radius-card, 8px);
+  margin: 40px auto 0;
+  max-width: 1200px;
+  padding: 48px 24px 40px;
+}
+.skills-cont h2 {
+  color: var(--we-heading, goldenrod);
+}
+
+/* Contact — login-like fields and CTA */
+.contact-section {
+  background: var(--we-bg, #111);
+  padding: 80px 15px 90px;
+}
+.contact-heading > h2 {
+  color: var(--we-heading, goldenrod);
+}
+.contact-heading > p {
+  color: var(--we-muted, #aaa);
+}
+.contact-section a {
+  color: var(--we-heading, goldenrod);
+}
+.contact-form {
+  font-family: var(--we-font-body, Lato, sans-serif);
+  background: var(--we-surface, #1c1c1c);
+  border: 1px solid var(--we-input, #2a2a2a);
+  border-radius: var(--we-radius-card, 8px);
+  padding: 32px 28px;
+}
+.form {
+  background-color: var(--we-surface, #1c1c1c);
+  color: var(--we-text, #eee);
+  border-radius: var(--we-radius-card, 8px);
+  padding: 32px 28px;
+}
+.form > label,
+.contact-form label,
+label {
+  color: var(--we-text, #eee);
+  font-family: var(--we-font-body, Lato, sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  margin: 12px 0 6px;
+}
+.form > input,
+.form textarea,
+.contact-form input,
+.contact-form textarea,
+input,
+textarea {
+  background: var(--we-input, #2a2a2a);
+  color: #fff;
+  border: 0;
+  border-radius: var(--we-radius-control, 4px);
+  padding: 10px 12px;
+  font-family: var(--we-font-body, Lato, sans-serif);
+  font-size: 16px;
+}
+.form > input:hover,
+textarea:hover,
+.contact-form input:hover,
+.contact-form textarea:hover {
+  background: var(--we-input, #2a2a2a);
+}
+.form > button,
+.contact-form button,
+button.button {
+  width: auto;
+  min-width: 140px;
+  height: auto;
+  margin: 20px 0 0;
+  padding: 12px 22px;
+  background: var(--we-accent, rgb(149, 191, 71));
+  color: var(--we-ink, #111);
+  border: 0;
+  border-radius: var(--we-radius-control, 4px);
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.form > button:hover,
+.contact-form button:hover,
+button.button:hover,
+button:hover {
+  opacity: 0.9;
+  background: var(--we-accent, rgb(149, 191, 71));
+  color: var(--we-ink, #111);
+}
+
+footer {
+  background-color: var(--we-surface, #1c1c1c);
+  color: var(--we-muted, #aaa);
+}
+.footer-links > ul > li > a:hover {
+  color: var(--we-accent, rgb(149, 191, 71));
+}
+
+@media only screen and (max-width: 780px) {
+  .projects-section {
+    padding: 56px 16px 80px;
+  }
+  .service-heading > h1,
+  .service-heading > h2 {
+    font-size: 8vw;
+  }
+  .contact-form {
+    padding: 24px 18px;
+  }
+  .img-text-cont,
+  .img-text-cont-2 {
+    padding: 48px 16px;
+  }
+}
+@media only screen and (max-width: 520px) {
+  .service-heading > h1,
+  .service-heading > h2 {
+    font-size: 12vw;
+  }
+}
+
+/* Klaviyo contact embed — match login card / fields without replacing the form */
+.contact-form:has(.klaviyo-form) {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  max-width: 640px;
+}
+.contact-section form.klaviyo-form,
+form.klaviyo-form {
+  background-color: var(--we-surface, #1c1c1c) !important;
+  border-radius: var(--we-radius-card, 8px) !important;
+  border: 1px solid var(--we-input, #2a2a2a) !important;
+  padding: 32px 28px !important;
+}
+.klaviyo-form h2,
+.klaviyo-form .h1 {
+  color: var(--we-heading, goldenrod) !important;
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif) !important;
+}
+.klaviyo-form label,
+.klaviyo-form legend,
+.klaviyo-form .klaviyo-promocheckbox div {
+  color: var(--we-text, #eee) !important;
+  font-family: var(--we-font-body, Lato, sans-serif) !important;
+}
+.klaviyo-form .klaviyo-textinput input,
+.klaviyo-form input[type="text"],
+.klaviyo-form input[type="email"],
+.klaviyo-form textarea {
+  background: var(--we-input, #2a2a2a) !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-radius: var(--we-radius-control, 4px) !important;
+  padding: 10px 12px !important;
+  font-family: var(--we-font-body, Lato, sans-serif) !important;
+  box-shadow: none !important;
+}
+.klaviyo-form .klaviyo-form-button,
+.klaviyo-form button.klaviyo-form-button {
+  background: var(--we-accent, rgb(149, 191, 71)) !important;
+  color: var(--we-ink, #111) !important;
+  border: 0 !important;
+  border-radius: var(--we-radius-control, 4px) !important;
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif) !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  opacity: 1 !important;
+}
+.klaviyo-form .klaviyo-form-button:hover,
+.klaviyo-form button.klaviyo-form-button:hover {
+  opacity: 0.9 !important;
+  background: var(--we-accent, rgb(149, 191, 71)) !important;
+  color: var(--we-ink, #111) !important;
+}
