@@ -39,3 +39,16 @@ export const termsOfService = (req, res) => {
     path.join(__dirname, "..", "public", "html", "terms-of-service.html")
   );
 };
+
+export const loginPage = (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "html", "login.html"));
+};
+export const accountPage = (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "html", "account.html"));
+};
+export const adminPage = (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "html", "admin.html"));
+};
+export const setupPage = (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "html", "setup.html"));
+};

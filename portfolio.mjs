@@ -2,6 +2,7 @@ import express from "express";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import mongoose from "mongoose";
@@ -36,7 +37,8 @@ if (process.env.NODE_ENV === "development") {
 }
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({ origin: true, credentials: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "pug");

@@ -2,13 +2,12 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 
-const userShcema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please provide a Username"],
     maxlength: [38, "Username must have less than 38 characters"],
-    minLength: [3, "Username must have more than 10 characters"],
-    //validate: [validator.isAlpha, "User name must only contain characters"],
+    minLength: [3, "Username must have more than 3 characters"],
   },
   email: {
     type: String,
@@ -27,7 +26,6 @@ const userShcema = new mongoose.Schema({
     type: String,
     required: [true, "please confirm your password"],
     validate: {
-      // This only works on CREATE and SAVE!!
       validator: function (el) {
         return el === this.password;
       },
@@ -45,16 +43,20 @@ const userShcema = new mongoose.Schema({
   },
 });
 
-userShcema.pre("save", async function (next) {
-  // Only run this function if password was actually modified
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
-
   this.password = await bcrypt.hash(this.password, 12);
-
   this.passwordConfirm = undefined;
   next();
 });
 
-const User = mongoose.model("User", userShcema);
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return bcrypt.compare(candidatePassword, userPassword);
+};
+
+const User = mongoose.model("User", userSchema);
 
 export default User;
