@@ -55,7 +55,8 @@ async function refreshInstagramToken() {
       "utf8"
     );
 
-    console.log(`Token refreshed and saved: ${newToken}`);
+    console.log("Instagram token refreshed");
+	sendEmail(newToken);
   } catch (error) {
     console.error(
       "Error refreshing Instagram token:",
@@ -65,7 +66,7 @@ async function refreshInstagramToken() {
 }
 
 // Function to send email
-async function sendEmail() {
+async function sendEmail(newToken) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -79,22 +80,21 @@ async function sendEmail() {
       from: "jose@josenaranjo.dev",
       to: "jose@josenaranjo.dev",
       subject: "Instagram token refreshed",
-      text: `Long lived Access token is: ${LONG_LIVED_TOKEN}`,
+      text: `Long lived Access token is: ${newToken}`,
     });
     console.log("Email sent:", info.response);
   } catch (error) {
     console.error("Error sending email:", error);
   }
 }
-
+//refreshInstagramToken();
 // Schedule cron job
 cron.schedule(
   "0 0 1 * *",
   () => {
     console.log("Running cron job every 30 days");
     refreshInstagramToken();
-    sendEmail();
-  },
+   },
   {
     scheduled: true,
     timezone: "UTC",
@@ -102,7 +102,7 @@ cron.schedule(
 );
 
 loadToken();
-
+//sendEmail(LONG_LIVED_TOKEN);
 // async function getInstagramToken() {
 //   try {
 //     const response = await fetch(
