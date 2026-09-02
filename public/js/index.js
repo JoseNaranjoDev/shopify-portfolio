@@ -30,18 +30,33 @@ if (window.innerWidth >= 780) {
   videoSource.setAttribute("src", "../video/portfolio-cta.mp4");
 }
 
-//Contact Form Handler
-document
-  .getElementById("homepageContactForm")
-  .addEventListener("submit", async (e) => {
-    console.log("form event happening!");
-    e.preventDefault(); // Prevent page reload
+const contactForm = document.getElementById("homepageContactForm");
+const contactFormReadyAt = Date.now();
+
+if (contactForm) {
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msgEl = document.getElementById("contact-msg");
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+    const setMsg = (text, kind) => {
+      if (!msgEl) return;
+      msgEl.textContent = text;
+      msgEl.classList.remove("is-success", "is-error");
+      if (kind) msgEl.classList.add(kind);
+    };
+
     const formData = new FormData(e.target);
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
       message: formData.get("message"),
+      website: formData.get("website") || "",
+      startedAt: contactFormReadyAt,
     };
+
+    if (submitBtn) submitBtn.disabled = true;
+    setMsg("Sending...", "");
 
     try {
       const response = await fetch("/api/v1/contact-data/homepagecontactform", {
@@ -51,14 +66,17 @@ document
         },
         body: JSON.stringify(data),
       });
-      const result = await response.json();
+      const result = await response.json().catch(() => ({}));
       if (result.success) {
-        alert(result.message); // Show success alert
-        e.target.reset(); // Optional: Reset form
+        setMsg(result.message || "Message sent successfully!", "is-success");
+        e.target.reset();
       } else {
-        alert(result.message); // Show error alert
+        setMsg(result.message || "Failed to send message.", "is-error");
       }
     } catch (error) {
-      alert("An error occurred. Please try again.");
+      setMsg("An error occurred. Please try again.", "is-error");
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
     }
   });
+}

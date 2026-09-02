@@ -1792,57 +1792,34 @@ footer {
   }
 }
 
-/* Klaviyo contact embed — match login card / fields without replacing the form */
-.contact-form:has(.klaviyo-form) {
-  background: transparent;
-  border: 0;
-  padding: 0;
-  max-width: 640px;
+.contact-form {
+  position: relative;
 }
-.contact-section form.klaviyo-form,
-form.klaviyo-form {
-  background-color: var(--we-surface, #1c1c1c) !important;
-  border-radius: var(--we-radius-card, 8px) !important;
-  border: 1px solid var(--we-input, #2a2a2a) !important;
-  padding: 32px 28px !important;
+.contact-heading-box .h1 {
+  color: var(--we-heading, goldenrod);
+  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
 }
-.klaviyo-form h2,
-.klaviyo-form .h1 {
-  color: var(--we-heading, goldenrod) !important;
-  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif) !important;
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
-.klaviyo-form label,
-.klaviyo-form legend,
-.klaviyo-form .klaviyo-promocheckbox div {
-  color: var(--we-text, #eee) !important;
-  font-family: var(--we-font-body, Lato, sans-serif) !important;
+.contact-msg {
+  margin-top: 14px;
+  min-height: 1.2em;
+  font-family: var(--we-font-body, Lato, sans-serif);
+  font-size: 14px;
+  color: var(--we-muted, #aaa);
 }
-.klaviyo-form .klaviyo-textinput input,
-.klaviyo-form input[type="text"],
-.klaviyo-form input[type="email"],
-.klaviyo-form textarea {
-  background: var(--we-input, #2a2a2a) !important;
-  color: #fff !important;
-  border: 0 !important;
-  border-radius: var(--we-radius-control, 4px) !important;
-  padding: 10px 12px !important;
-  font-family: var(--we-font-body, Lato, sans-serif) !important;
-  box-shadow: none !important;
+.contact-msg.is-success {
+  color: var(--we-accent, rgb(149, 191, 71));
 }
-.klaviyo-form .klaviyo-form-button,
-.klaviyo-form button.klaviyo-form-button {
-  background: var(--we-accent, rgb(149, 191, 71)) !important;
-  color: var(--we-ink, #111) !important;
-  border: 0 !important;
-  border-radius: var(--we-radius-control, 4px) !important;
-  font-family: var(--we-font-heading, "Gemunu Libre", sans-serif) !important;
-  font-weight: 700 !important;
-  font-size: 20px !important;
-  opacity: 1 !important;
-}
-.klaviyo-form .klaviyo-form-button:hover,
-.klaviyo-form button.klaviyo-form-button:hover {
-  opacity: 0.9 !important;
-  background: var(--we-accent, rgb(149, 191, 71)) !important;
-  color: var(--we-ink, #111) !important;
+.contact-msg.is-error {
+  color: #f66;
 }

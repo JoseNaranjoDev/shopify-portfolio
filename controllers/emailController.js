@@ -1,53 +1,133 @@
 import dotenv from "dotenv";
 import sgMail from "@sendgrid/mail";
-import nodemailer from "nodemailer";
+import validator from "validator";
 dotenv.config({ path: "./config.env" });
-const recieveEmail = process.env.CONTACT_FORM_USER;
-const emailPassword = process.env.CONTACT_FORM_PASSWORD;
 
-export const contactFormEmail = (req, res) => {
-  console.log("Homepage form Submission route hit!");
-  const { name, email, message } = req.body;
-  // Function to send email
-  async function sendEmail() {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: recieveEmail,
-        pass: emailPassword,
-      },
-    });
+const CONTACT_TO = "josenaranjo.dev@gmail.com";
+const MIN_SUBMIT_MS = 3000;
+const MAX_SUBMIT_AGE_MS = 60 * 60 * 1000;
+const RATE_WINDOW_MS = 15 * 60 * 1000;
+const RATE_MAX = 5;
+const ipHits = new Map();
 
-    try {
-      const info = await transporter.sendMail({
-        from: "jose@josenaranjo.dev",
-        to: "jose@josenaranjo.dev",
-        subject: "New Webecom Form Submission",
-        text: `
-        Name: ${name}
-        Email: ${email}
-        Message: ${message}
-        `,
-      });
-      console.log("Email sent:", info.response);
-      return true; // Indicate success
-    } catch (error) {
-      console.error("Error sending email:", error);
-      throw error; // Propagate error
-    }
+function getClientIp(req) {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (typeof forwarded === "string" && forwarded.trim()) {
+    return forwarded.split(",")[0].trim();
+  }
+  return req.ip || req.socket?.remoteAddress || "unknown";
+}
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const hits = (ipHits.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (hits.length >= RATE_MAX) {
+    ipHits.set(ip, hits);
+    return true;
+  }
+  hits.push(now);
+  ipHits.set(ip, hits);
+  return false;
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+export const contactFormEmail = async (req, res) => {
+  const body = req.body && typeof req.body === "object" ? req.body : {};
+  const name = typeof body.name === "string" ? body.name.trim() : "";
+  const email = typeof body.email === "string" ? body.email.trim() : "";
+  const message = typeof body.message === "string" ? body.message.trim() : "";
+  const honeypot = typeof body.website === "string" ? body.website.trim() : "";
+  const startedAtRaw = body.startedAt;
+
+  if (honeypot) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Unable to send message." });
   }
 
-  sendEmail()
-    .then(() => {
-      res
-        .status(200)
-        .json({ success: true, message: "Message sent successfully!" });
-    })
-    .catch((error) => {
-      res
-        .status(500)
-        .json({ success: false, message: "Failed to send message." });
+  if (!name || !email || !message) {
+    return res.status(400).json({
+      success: false,
+      message: "Name, email, and message are required.",
     });
+  }
+
+  if (name.length > 100) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Please enter a valid name." });
+  }
+
+  if (!validator.isEmail(email) || email.length > 254) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Please enter a valid email." });
+  }
+
+  if (message.length > 5000) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Please enter a message." });
+  }
+
+  const startedAt = Number(startedAtRaw);
+  const now = Date.now();
+  if (!Number.isFinite(startedAt) || startedAt > now + 5000) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Unable to send message." });
+  }
+  const elapsed = now - startedAt;
+  if (elapsed < MIN_SUBMIT_MS || elapsed > MAX_SUBMIT_AGE_MS) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Unable to send message." });
+  }
+
+  const ip = getClientIp(req);
+  if (isRateLimited(ip)) {
+    return res.status(429).json({
+      success: false,
+      message: "Too many attempts. Please try again later.",
+    });
+  }
+
+  const from = process.env.SENDGRID_VERIFIED_SENDER;
+  const apiKey = process.env.SENDGRID_API_KEY;
+  if (!apiKey || !from) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Failed to send message." });
+  }
+
+  try {
+    sgMail.setApiKey(apiKey);
+    await sgMail.send({
+      to: CONTACT_TO,
+      from,
+      replyTo: email,
+      subject: "New portfolio contact form",
+      text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`,
+      html: `<p><strong>Name:</strong> ${escapeHtml(name)}</p>
+<p><strong>Email:</strong> ${escapeHtml(email)}</p>
+<p><strong>Message:</strong></p>
+<p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>`,
+    });
+    return res
+      .status(200)
+      .json({ success: true, message: "Message sent successfully!" });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Failed to send message." });
+  }
 };
 
 export const VariantWheelsAccess = (req, res) => {
