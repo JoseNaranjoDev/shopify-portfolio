@@ -1,8 +1,8 @@
-import User from "../models/userModel.js";
+import { listUsers, createUser } from "../models/userModel.js";
 import { catchAsync } from "../utils/catchAsync.js";
 
 export const getAllUsers = catchAsync(async (req, res) => {
-  const users = await User.find();
+  const users = listUsers();
 
   res.status(200).json({
     status: "success",
@@ -11,7 +11,6 @@ export const getAllUsers = catchAsync(async (req, res) => {
       users,
     },
   });
-  console.log(users);
 });
 export const getUser = (req, res) => {
   res.status(500).json({
@@ -31,20 +30,26 @@ export const deleteUser = (req, res) => {
     message: "This route is yet not defined!",
   });
 };
-export const createUser = async (req, res) => {
-  try {
-    const newUser = await User.create(req.body);
+export const createUserHandler = catchAsync(async (req, res) => {
+  const newUser = await createUser({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm,
+    role: req.body.role === "admin" ? "admin" : "user",
+  });
 
-    res.status(500).json({
-      status: "success",
-      data: {
-        user: newUser,
+  res.status(201).json({
+    status: "success",
+    data: {
+      user: {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+        role: newUser.role,
       },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: "fail",
-      message: err,
-    });
-  }
-};
+    },
+  });
+});
+
+export { createUserHandler as createUser };

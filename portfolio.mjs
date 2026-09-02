@@ -5,7 +5,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import morgan from "morgan";
-import mongoose from "mongoose";
 import userRouter from "./routes/userRoutes.js";
 import pageRouter from "./routes/pageRoutes.js";
 import tokenRouter from "./routes/tokenRoutes.js";
@@ -13,19 +12,11 @@ import contactData from "./routes/emailRoutes.js";
 import { AppError } from "./utils/appError.js";
 import { globalErrorHandler } from "./controllers/errorController.js";
 import "./server/cron.js";
+import "./models/userModel.js";
 
 const app = express();
 
 dotenv.config({ path: "./config.env" });
-
-const DB = process.env.DATABASE.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
-);
-
-mongoose.connect(DB, {}).then(() => {
-  console.log("DB connection successful!");
-});
 
 // STATIC FOLDERS
 const __filename = fileURLToPath(import.meta.url);

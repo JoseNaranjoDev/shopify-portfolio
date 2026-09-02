@@ -6,3 +6,5 @@ video/
 config.env
 Mongo DB.txt
 server/*
+server/users.db
+*.db

@@ -1,5 +1,12 @@
 import jwt from "jsonwebtoken";
-import User from "../models/userModel.js";
+import {
+  findByEmail,
+  findById,
+  createUser,
+  listUsers,
+  countAdmins,
+  correctPassword,
+} from "../models/userModel.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import { AppError } from "../utils/appError.js";
 
@@ -17,7 +24,7 @@ const cookieOptions = () => ({
 });
 
 const sendAuth = (user, statusCode, res) => {
-  const token = signToken(user._id);
+  const token = signToken(user.id);
   res.cookie("jwt", token, cookieOptions());
   res.status(statusCode).json({
     status: "success",
@@ -33,15 +40,14 @@ const sendAuth = (user, statusCode, res) => {
 
 const authController = {
   setupAdmin: catchAsync(async (req, res, next) => {
-    const existingAdmin = await User.findOne({ role: "admin" });
-    if (existingAdmin) {
-      return next(new AppError("Admin already exists.", 403));
-    }
-    const { name, email, password, passwordConfirm } = req.body;
+    const { name, email, password, passwordConfirm } = req.body || {};
     if (!email || !password) {
       return next(new AppError("Please provide email and password.", 400));
     }
-    const user = await User.create({
+    if (countAdmins() > 0) {
+      return next(new AppError("Admin already exists.", 403));
+    }
+    const user = await createUser({
       name: name || "Admin",
       email,
       password,
@@ -52,9 +58,9 @@ const authController = {
   }),
 
   signup: catchAsync(async (req, res, next) => {
-    const user = await User.create({
+    const user = await createUser({
       name: req.body.name,
-      email: String(req.body.email || "").toLowerCase(),
+      email: req.body.email,
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm,
       role: "user",
@@ -63,14 +69,12 @@ const authController = {
   }),
 
   login: catchAsync(async (req, res, next) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body || {};
     if (!email || !password) {
       return next(new AppError("Please provide email and password.", 400));
     }
-    const user = await User.findOne({
-      email: String(email).toLowerCase(),
-    }).select("+password");
-    if (!user || !(await user.correctPassword(password, user.password))) {
+    const user = findByEmail(email);
+    if (!user || !(await correctPassword(password, user.password))) {
       return next(new AppError("Incorrect email or password.", 401));
     }
     sendAuth(user, 200, res);
@@ -105,11 +109,16 @@ const authController = {
       return next(new AppError("Please log in.", 401));
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id);
+    const user = findById(decoded.id);
     if (!user) {
       return next(new AppError("User no longer exists.", 401));
     }
-    req.user = user;
+    req.user = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    };
     next();
   }),
 
@@ -136,7 +145,7 @@ const authController = {
   }),
 
   adminOverview: catchAsync(async (req, res) => {
-    const users = await User.find().select("name email role");
+    const users = listUsers();
     res.status(200).json({
       status: "success",
       data: { users },
