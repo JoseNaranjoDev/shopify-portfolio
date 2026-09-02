@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import sgMail from "@sendgrid/mail";
+import nodemailer from "nodemailer";
 import validator from "validator";
 dotenv.config({ path: "./config.env" });
 
@@ -99,19 +100,28 @@ export const contactFormEmail = async (req, res) => {
     });
   }
 
-  const from = process.env.SENDGRID_VERIFIED_SENDER;
-  const apiKey = process.env.SENDGRID_API_KEY;
-  if (!apiKey || !from) {
+  const smtpUser = process.env.CONTACT_FORM_USER;
+  const smtpPass = process.env.CONTACT_FORM_PASSWORD;
+  if (!smtpUser || !smtpPass) {
     return res
       .status(500)
       .json({ success: false, message: "Failed to send message." });
   }
 
   try {
-    sgMail.setApiKey(apiKey);
-    await sgMail.send({
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: smtpUser,
+        pass: smtpPass,
+      },
+    });
+
+    await transporter.sendMail({
       to: CONTACT_TO,
-      from,
+      from: smtpUser,
       replyTo: email,
       subject: "New portfolio contact form",
       text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`,
