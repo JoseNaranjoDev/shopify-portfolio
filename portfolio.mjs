@@ -11,6 +11,7 @@ import tokenRouter from "./routes/tokenRoutes.js";
 import contactData from "./routes/emailRoutes.js";
 import { AppError } from "./utils/appError.js";
 import { globalErrorHandler } from "./controllers/errorController.js";
+import { trackPageVisits } from "./middleware/trackVisits.js";
 import "./server/cron.js";
 import "./models/userModel.js";
 
@@ -31,6 +32,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }));
 
+app.use(trackPageVisits);
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "pug");
 

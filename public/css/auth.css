@@ -143,3 +143,50 @@
   font-size: 20px;
 }
 .members-wrap #logout-btn:hover { opacity: 0.9; }
+
+.stats-note {
+  color: var(--we-muted);
+  font-size: 13px;
+  margin: 0 0 18px;
+  line-height: 1.5;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.stat-card {
+  background: var(--we-input);
+  border-radius: var(--we-radius-card);
+  padding: 18px 16px;
+}
+.stat-card h3 {
+  font-family: var(--we-font-heading);
+  color: var(--we-heading);
+  font-size: 22px;
+  margin: 0 0 12px;
+}
+.stat-list {
+  margin: 0;
+}
+.stat-list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #333;
+}
+.stat-list > div:last-child {
+  border-bottom: 0;
+}
+.stat-list dt {
+  color: var(--we-muted);
+  font-size: 14px;
+}
+.stat-list dd {
+  margin: 0;
+  color: var(--we-accent);
+  font-family: var(--we-font-heading);
+  font-size: 22px;
+  font-weight: 700;
+}

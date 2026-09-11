@@ -6,6 +6,8 @@ import {
   listUsers,
   countAdmins,
   correctPassword,
+  recordLoginEvent,
+  getAnalyticsSummary,
 } from "../models/userModel.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import { AppError } from "../utils/appError.js";
@@ -54,6 +56,11 @@ const authController = {
       passwordConfirm,
       role: "admin",
     });
+    try {
+      recordLoginEvent(user.id, user.email);
+    } catch (err) {
+      // setup still succeeds even if analytics write fails
+    }
     sendAuth(user, 201, res);
   }),
 
@@ -65,6 +72,11 @@ const authController = {
       passwordConfirm: req.body.passwordConfirm,
       role: "user",
     });
+    try {
+      recordLoginEvent(user.id, user.email);
+    } catch (err) {
+      // signup still succeeds even if analytics write fails
+    }
     sendAuth(user, 201, res);
   }),
 
@@ -76,6 +88,11 @@ const authController = {
     const user = findByEmail(email);
     if (!user || !(await correctPassword(password, user.password))) {
       return next(new AppError("Incorrect email or password.", 401));
+    }
+    try {
+      recordLoginEvent(user.id, user.email);
+    } catch (err) {
+      // login still succeeds even if analytics write fails
     }
     sendAuth(user, 200, res);
   }),
@@ -146,9 +163,13 @@ const authController = {
 
   adminOverview: catchAsync(async (req, res) => {
     const users = listUsers();
+    const analytics = getAnalyticsSummary();
     res.status(200).json({
       status: "success",
-      data: { users },
+      data: {
+        users,
+        analytics,
+      },
     });
   }),
 

@@ -36,6 +36,41 @@ db.run(`
     created_at TEXT DEFAULT CURRENT_TIMESTAMP
   )
 `);
+
+function ensureColumn(table, column, definition) {
+  const info = db.exec(`PRAGMA table_info(${table})`);
+  const cols = info.length ? info[0].values.map((row) => row[1]) : [];
+  if (!cols.includes(column)) {
+    db.run(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+  }
+}
+
+ensureColumn("users", "last_login_at", "TEXT");
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS page_visits (
+    id INTEGER PRIMARY KEY,
+    path TEXT NOT NULL,
+    visited_at TEXT NOT NULL DEFAULT (datetime('now'))
+  )
+`);
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS login_events (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    email TEXT,
+    logged_in_at TEXT NOT NULL DEFAULT (datetime('now'))
+  )
+`);
+
+db.run(
+  `CREATE INDEX IF NOT EXISTS idx_page_visits_visited_at ON page_visits(visited_at)`
+);
+db.run(
+  `CREATE INDEX IF NOT EXISTS idx_login_events_logged_in_at ON login_events(logged_in_at)`
+);
+
 persist();
 
 function persist() {
@@ -64,9 +99,17 @@ function rowsFromStmt(stmt) {
   return rows;
 }
 
+function countSince(table, timeColumn, sinceSql) {
+  const stmt = db.prepare(
+    `SELECT COUNT(*) AS n FROM ${table} WHERE ${timeColumn} >= ${sinceSql}`
+  );
+  const row = rowFromStmt(stmt);
+  return Number(row?.n || 0);
+}
+
 export function findByEmail(email) {
   const stmt = db.prepare(
-    "SELECT id, name, email, password, role, created_at FROM users WHERE email = ? COLLATE NOCASE"
+    "SELECT id, name, email, password, role, created_at, last_login_at FROM users WHERE email = ? COLLATE NOCASE"
   );
   stmt.bind([String(email || "").trim()]);
   return rowFromStmt(stmt);
@@ -74,7 +117,7 @@ export function findByEmail(email) {
 
 export function findById(id) {
   const stmt = db.prepare(
-    "SELECT id, name, email, password, role, created_at FROM users WHERE id = ?"
+    "SELECT id, name, email, password, role, created_at, last_login_at FROM users WHERE id = ?"
   );
   stmt.bind([Number(id)]);
   return rowFromStmt(stmt);
@@ -82,7 +125,7 @@ export function findById(id) {
 
 export function listUsers() {
   const stmt = db.prepare(
-    "SELECT id, name, email, role, created_at FROM users ORDER BY id"
+    "SELECT id, name, email, role, created_at, last_login_at FROM users ORDER BY id"
   );
   return rowsFromStmt(stmt);
 }
@@ -150,6 +193,70 @@ export async function createUser(input) {
 
 export async function correctPassword(candidatePassword, userPassword) {
   return bcrypt.compare(candidatePassword, userPassword);
+}
+
+export function recordPageVisit(pathValue) {
+  const cleaned = String(pathValue || "/").slice(0, 500);
+  db.run("INSERT INTO page_visits (path, visited_at) VALUES (?, datetime('now'))", [
+    cleaned,
+  ]);
+  persist();
+}
+
+export function recordLoginEvent(userId, email) {
+  db.run(
+    "UPDATE users SET last_login_at = datetime('now') WHERE id = ?",
+    [Number(userId)]
+  );
+  db.run(
+    "INSERT INTO login_events (user_id, email, logged_in_at) VALUES (?, ?, datetime('now'))",
+    [Number(userId) || null, String(email || "").slice(0, 320)]
+  );
+  persist();
+}
+
+export function getAnalyticsSummary() {
+  return {
+    visits: {
+      today: countSince(
+        "page_visits",
+        "visited_at",
+        "datetime('now', 'start of day')"
+      ),
+      last7Days: countSince(
+        "page_visits",
+        "visited_at",
+        "datetime('now', '-7 days')"
+      ),
+      last30Days: countSince(
+        "page_visits",
+        "visited_at",
+        "datetime('now', '-30 days')"
+      ),
+    },
+    logins: {
+      today: countSince(
+        "login_events",
+        "logged_in_at",
+        "datetime('now', 'start of day')"
+      ),
+      last7Days: countSince(
+        "login_events",
+        "logged_in_at",
+        "datetime('now', '-7 days')"
+      ),
+      last30Days: countSince(
+        "login_events",
+        "logged_in_at",
+        "datetime('now', '-30 days')"
+      ),
+    },
+    windows: {
+      today: "Today (UTC calendar day)",
+      last7Days: "Last 7 days (rolling)",
+      last30Days: "Last 30 days (rolling)",
+    },
+  };
 }
 
 export const dbFilePath = dbPath;

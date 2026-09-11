@@ -21,6 +21,64 @@ async function api(path, options = {}) {
   return data;
 }
 
+function formatLastLogin(value) {
+  if (!value) return "—";
+  const raw = String(value).trim();
+  const asUtc = /Z$|[+-]\d{2}:?\d{2}$/.test(raw)
+    ? raw
+    : raw.includes("T")
+      ? `${raw}Z`
+      : `${raw.replace(" ", "T")}Z`;
+  const d = new Date(asUtc);
+  if (Number.isNaN(d.getTime())) return raw;
+  return d.toLocaleString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
+function renderAdminOverview(overview) {
+  const analytics = overview.data.analytics || {};
+  const visits = analytics.visits || {};
+  const logins = analytics.logins || {};
+  const windows = analytics.windows || {};
+
+  const setText = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  };
+
+  setText("visits-today", visits.today ?? 0);
+  setText("visits-7d", visits.last7Days ?? 0);
+  setText("visits-30d", visits.last30Days ?? 0);
+  setText("logins-today", logins.today ?? 0);
+  setText("logins-7d", logins.last7Days ?? 0);
+  setText("logins-30d", logins.last30Days ?? 0);
+
+  const windowsEl = document.getElementById("stats-windows");
+  if (windowsEl) {
+    windowsEl.textContent = [
+      windows.today || "Today (UTC calendar day)",
+      windows.last7Days || "Last 7 days (rolling)",
+      windows.last30Days || "Last 30 days (rolling)",
+    ].join(" · ");
+  }
+
+  const tbody = document.querySelector("#users tbody");
+  if (!tbody) return;
+  tbody.innerHTML = (overview.data.users || [])
+    .map(
+      (row) =>
+        `<tr><td>${row.name || ""}</td><td>${row.email || ""}</td><td>${
+          row.role || ""
+        }</td><td>${formatLastLogin(row.last_login_at)}</td></tr>`
+    )
+    .join("");
+}
+
 const loginForm = document.getElementById("login-form");
 if (loginForm) {
   const params = new URLSearchParams(location.search);
@@ -118,13 +176,7 @@ async function bootAccount() {
         return;
       }
       const overview = await api("/api/v1/users/admin-overview");
-      const tbody = document.querySelector("#users tbody");
-      tbody.innerHTML = overview.data.users
-        .map(
-          (row) =>
-            `<tr><td>${row.name}</td><td>${row.email}</td><td>${row.role}</td></tr>`
-        )
-        .join("");
+      renderAdminOverview(overview);
     }
     if (location.pathname === "/account" && u.role === "admin") {
       location.href = "/admin";

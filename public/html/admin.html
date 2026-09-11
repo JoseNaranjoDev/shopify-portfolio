@@ -20,12 +20,46 @@
   <main class="members-wrap">
     <div class="members-inner members-inner--wide">
       <p class="members-kicker">Admin</p>
-      <h1>Site members</h1>
+      <h1>Site overview</h1>
       <p class="members-sub" id="who">Loading…</p>
 
-      <section class="members-panel">
-        <h2>User table</h2>
-        <table class="user-table" id="users"><thead><tr><th>Name</th><th>Email</th><th>Role</th></tr></thead><tbody></tbody></table>
+      <section class="members-panel" aria-labelledby="analytics-heading">
+        <h2 id="analytics-heading">Analytics</h2>
+        <p class="stats-note" id="stats-windows">Visit and login counts use UTC windows.</p>
+        <div class="stats-grid" id="stats-grid">
+          <article class="stat-card">
+            <h3>Page visits</h3>
+            <dl class="stat-list">
+              <div><dt>Today</dt><dd id="visits-today">—</dd></div>
+              <div><dt>Last 7 days</dt><dd id="visits-7d">—</dd></div>
+              <div><dt>Last 30 days</dt><dd id="visits-30d">—</dd></div>
+            </dl>
+          </article>
+          <article class="stat-card">
+            <h3>Successful logins</h3>
+            <dl class="stat-list">
+              <div><dt>Today</dt><dd id="logins-today">—</dd></div>
+              <div><dt>Last 7 days</dt><dd id="logins-7d">—</dd></div>
+              <div><dt>Last 30 days</dt><dd id="logins-30d">—</dd></div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="members-panel" aria-labelledby="users-heading">
+        <h2 id="users-heading">Users</h2>
+        <p class="members-sub">Usernames and emails (no passwords). Last login when available.</p>
+        <table class="user-table" id="users">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Last login</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </section>
 
       <button type="button" id="logout-btn">Log out</button>
