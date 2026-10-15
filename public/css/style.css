@@ -1823,3 +1823,65 @@ footer {
 .contact-msg.is-error {
   color: #f66;
 }
+
+/* Skills grid (redesign) — icons: Simple Icons (CC0-1.0), Liquid: vscode-icons (MIT) */
+.skill-grid {
+  list-style: none;
+  margin: 24px auto 0;
+  padding: 0;
+  width: 100%;
+  max-width: 1040px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 20px;
+}
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 28px 12px 22px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.skill-icon {
+  width: 56px;
+  height: 56px;
+  color: var(--skill-color, #ddd);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+}
+.skill-label {
+  font-family: var(--we-font-body, Lato, sans-serif);
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--we-text, #eee);
+  opacity: 0.85;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+.skill-card:hover,
+.skill-card:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--we-heading, goldenrod);
+  background-color: rgba(218, 165, 32, 0.06);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+.skill-card:hover .skill-label {
+  color: var(--we-heading, goldenrod);
+  opacity: 1;
+}
+@media only screen and (max-width: 900px) {
+  .skill-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+}
+@media only screen and (max-width: 520px) {
+  .skill-grid { gap: 12px; }
+  .skill-card { padding: 20px 8px 16px; gap: 10px; border-radius: 12px; }
+  .skill-icon { width: 44px; height: 44px; }
+  .skill-label { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skill-card { transition: none; }
+  .skill-card:hover, .skill-card:focus-within { transform: none; }
+}
